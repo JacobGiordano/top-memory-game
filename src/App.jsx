@@ -34,6 +34,20 @@ function App() {
     };
   }, []);
 
+  // Card creation
+  useEffect(() => {
+    const controller = new AbortController();
+    const createCards = (characters) => {
+      getCharactersForCards();
+    };
+
+    createCards(characters);
+
+    return () => {
+      controller.abort;
+    };
+  }, [characters, difficulty]);
+
   // Get random number within specified range
   const getRandom = (min, max) => {
     const minRoundedUp = Math.ceil(min);
@@ -74,20 +88,6 @@ function App() {
     console.log(selectedCharacters);
     return selectedCharacters;
   };
-
-  // Card creation
-  useEffect(() => {
-    const controller = new AbortController();
-    const createCards = (characters) => {
-      getCharactersForCards();
-    };
-
-    createCards(characters);
-
-    return () => {
-      controller.abort;
-    };
-  }, [characters, difficulty]);
 
   return (
     <>
