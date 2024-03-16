@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   const [characters, setCharacters] = useState([]);
-  const [difficulty, setDifficulty] = useState();
+  const [difficulty, setDifficulty] = useState("easy");
 
   // Fetching character data
   useEffect(() => {
@@ -20,7 +20,6 @@ function App() {
       })
         .then((resp) => resp.json())
         .then(function (res) {
-          console.log(res.data.results);
           setCharacters(res.data.results);
         });
     };
@@ -35,11 +34,52 @@ function App() {
     };
   }, []);
 
+  // Get random number within specified range
+  const getRandom = (min, max) => {
+    const minRoundedUp = Math.ceil(min);
+    const maxRoundedDown = Math.floor(max);
+    return Math.floor(
+      Math.random() * (maxRoundedDown - minRoundedUp + 1) + minRoundedUp
+    );
+  };
+
+  // Get the required number of cards based on difficulty
+  const getCardCount = (difficulty) => {
+    let numOfCards = 0;
+    switch (difficulty) {
+      case "hard":
+        numOfCards = 12;
+        break;
+      case "medium":
+        numOfCards = 8;
+        break;
+      case "easy":
+        numOfCards = 4;
+        break;
+      default:
+        numOfCards = 4;
+        break;
+    }
+    return numOfCards;
+  };
+
+  // Get random characters for cards
+  const getCharactersForCards = () => {
+    let selectedCharacters = [];
+    const numOfCards = getCardCount();
+    for (let i = 0; i < numOfCards; i++) {
+      const chosenCharacter = characters[getRandom(0, characters.length - 1)];
+      selectedCharacters.push(chosenCharacter);
+    }
+    console.log(selectedCharacters);
+    return selectedCharacters;
+  };
+
   // Card creation
   useEffect(() => {
     const controller = new AbortController();
     const createCards = (characters) => {
-      characters.map((character) => console.log(character.name));
+      getCharactersForCards();
     };
 
     createCards(characters);
