@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Header from "./components/Header/Header";
+import Button from "./components/Button/Button";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -118,9 +120,13 @@ function App() {
 
   return (
     <>
+      <Header></Header>
       <div className='card'>
         <p>
-          <button onClick={getCharactersForCards}>Get characters</button>
+          <Button text='Get characters' onClick={getCharactersForCards} />
+        </p>
+        <p>
+          <Button text='Shuffle characters' onClick={handleCardClick} />
         </p>
       </div>
     </>
