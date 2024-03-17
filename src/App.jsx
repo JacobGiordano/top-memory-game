@@ -3,7 +3,8 @@ import "./App.css";
 
 function App() {
   const [characters, setCharacters] = useState([]);
-  const [difficulty, setDifficulty] = useState("easy");
+  const [selectedCharacters, setSelectedCharacters] = useState([]);
+  const [difficulty, setDifficulty] = useState("hard");
 
   // Fetching character data
   useEffect(() => {
@@ -66,13 +67,39 @@ function App() {
   // Get random characters for cards
   const getCharactersForCards = () => {
     let selectedCharacters = [];
-    const numOfCards = getCardCount();
+    const numOfCards = getCardCount(difficulty);
     for (let i = 0; i < numOfCards; i++) {
       const chosenCharacter = characters[getRandom(0, characters.length - 1)];
       selectedCharacters.push(chosenCharacter);
     }
+    console.log("Unshuffled characters array:");
     console.log(selectedCharacters);
-    return selectedCharacters;
+    setSelectedCharacters(selectedCharacters);
+  };
+
+  // Shuffle the order of an array's entries
+  const shuffleArray = (array) => {
+    const shuffledArray = [];
+    const usedIndecies = [];
+
+    let i = 0;
+    while (i < array.length) {
+      const randomIndex = Math.floor(Math.random() * array.length);
+      if (!usedIndecies.includes(randomIndex)) {
+        shuffledArray.push(array[randomIndex]);
+        usedIndecies.push(randomIndex);
+        i++;
+      }
+    }
+
+    setSelectedCharacters(shuffledArray);
+    console.log("Shuffled characters array:");
+    console.log(shuffledArray);
+  };
+
+  // Handle Card Clicks
+  const handleCardClick = () => {
+    shuffleArray(selectedCharacters);
   };
 
   // Card creation
