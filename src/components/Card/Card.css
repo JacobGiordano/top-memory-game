@@ -1,0 +1,24 @@
+.character-card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background: red;
+  border: 1px solid red;
+  border-radius: 0.5rem;
+  max-width: 12rem;
+  overflow: hidden;
+}
+
+.character-card-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.character-card-name {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.25rem;
+}

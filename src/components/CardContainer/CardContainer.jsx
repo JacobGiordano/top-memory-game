@@ -8,6 +8,6 @@ function CardContainer({ characterData }) {
       <Card key={i} characterData={character}></Card>
     ));
   }
-  return <div className='card-container'>{cards}</div>;
+  return <div className='character-card-container'>{cards}</div>;
 }
 export default CardContainer;
