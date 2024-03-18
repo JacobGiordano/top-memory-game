@@ -102,6 +102,16 @@ function App() {
     setSelectedCharacters(selectedCharacters);
   };
 
+  // Check to see if the original array and the shuffled array are the same
+  const arrayIsTheSame = (originalArray, shuffledArray) => {
+    if (originalArray.length === shuffledArray.length) {
+      for (let i = 0; i < shuffledArray.length; i++) {
+        if (originalArray[i] !== shuffledArray[i]) return false;
+      }
+    }
+    return true;
+  };
+
   // Shuffle the order of an array's entries
   const shuffleArray = (array) => {
     const shuffledArray = [];
@@ -117,9 +127,15 @@ function App() {
       }
     }
 
-    setSelectedCharacters(shuffledArray);
-    console.log("Shuffled characters array:");
-    console.log(shuffledArray);
+    if (!arrayIsTheSame(array, shuffledArray)) {
+      setSelectedCharacters(shuffledArray);
+      console.log("Shuffled characters array:");
+      console.log(shuffledArray);
+      return;
+    }
+
+    console.warn("array == shuffledArray. Let's do that again!");
+    shuffleArray(array);
   };
 
   // Handle Card Clicks
