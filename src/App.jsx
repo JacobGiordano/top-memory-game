@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Button from "./components/Button/Button";
+import CardContainer from "./components/CardContainer/CardContainer";
 
 function App() {
   const [characters, setCharacters] = useState([]);
   const [selectedCharacters, setSelectedCharacters] = useState([]);
-  const [difficulty, setDifficulty] = useState("hard");
+  const [difficulty, setDifficulty] = useState("");
 
   // Fetching character data
   useEffect(() => {
@@ -86,7 +87,15 @@ function App() {
     const numOfCards = getCardCount(difficulty);
     for (let i = 0; i < numOfCards; i++) {
       const chosenCharacter = characters[getRandom(0, characters.length - 1)];
-      selectedCharacters.push(chosenCharacter);
+      if (
+        (chosenCharacter &&
+          chosenCharacter.thumbnail.path.includes("image_not_available")) ||
+        (chosenCharacter && selectedCharacters.includes(chosenCharacter))
+      ) {
+        i--;
+      } else {
+        selectedCharacters.push(chosenCharacter);
+      }
     }
     console.log("Unshuffled characters array:");
     console.log(selectedCharacters);
@@ -120,7 +129,9 @@ function App() {
 
   return (
     <>
-      <Header></Header>
+      <Header>
+        <Button text='Reset'></Button>
+      </Header>
       <div className='card'>
         <p>
           <Button text='Get characters' onClick={getCharactersForCards} />
@@ -128,6 +139,7 @@ function App() {
         <p>
           <Button text='Shuffle characters' onClick={handleCardClick} />
         </p>
+        <CardContainer characterData={selectedCharacters} />
       </div>
     </>
   );

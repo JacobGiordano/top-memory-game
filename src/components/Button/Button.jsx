@@ -1,3 +1,5 @@
+import "./Button.css";
+
 function Button({ children, classString, text, onClick }) {
   const classes = classString ? classString : null;
   return (
