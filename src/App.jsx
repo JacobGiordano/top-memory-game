@@ -148,14 +148,17 @@ function App() {
       <Header>
         <Button text='Reset'></Button>
       </Header>
-      <div className='card'>
+      <div>
         <p>
           <Button text='Get characters' onClick={getCharactersForCards} />
         </p>
         <p>
           <Button text='Shuffle characters' onClick={handleCardClick} />
         </p>
-        <CardContainer characterData={selectedCharacters} />
+        <CardContainer
+          characterData={selectedCharacters}
+          handleCardClick={handleCardClick}
+        />
       </div>
     </>
   );
