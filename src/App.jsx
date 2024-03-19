@@ -3,11 +3,16 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Button from "./components/Button/Button";
 import CardContainer from "./components/CardContainer/CardContainer";
+import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
+import Scoreboard from "./components/Scoreboard/Scoreboard";
 
 function App() {
   const [characters, setCharacters] = useState([]);
   const [selectedCharacters, setSelectedCharacters] = useState([]);
   const [difficulty, setDifficulty] = useState("");
+  const [clickedCards, setClickedCards] = useState([]);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   // Fetching character data
   useEffect(() => {
@@ -41,7 +46,7 @@ function App() {
   // Card creation
   useEffect(() => {
     const controller = new AbortController();
-    const createCards = (characters) => {
+    const createCards = () => {
       getCharactersForCards();
     };
 
@@ -97,8 +102,7 @@ function App() {
         selectedCharacters.push(chosenCharacter);
       }
     }
-    console.log("Unshuffled characters array:");
-    console.log(selectedCharacters);
+
     setSelectedCharacters(selectedCharacters);
   };
 
@@ -129,24 +133,74 @@ function App() {
 
     if (!arrayIsTheSame(array, shuffledArray)) {
       setSelectedCharacters(shuffledArray);
-      console.log("Shuffled characters array:");
-      console.log(shuffledArray);
       return;
     }
 
-    console.warn("array == shuffledArray. Let's do that again!");
     shuffleArray(array);
   };
 
+  // Keep Score
+  const keepScore = (characterName) => {
+    setClickedCards([...clickedCards, characterName]);
+    setScore(score + 1);
+  };
+
+  // Check for win condition
+  const gameState = (characterName) => {
+    let status = "continue";
+    if (selectedCharacters && score === selectedCharacters.length) {
+      alert("You win!");
+      return "stop";
+    }
+    if (clickedCards.includes(characterName)) {
+      alert("Game over");
+      return "stop";
+    }
+    return status;
+  };
+
   // Handle Card Clicks
-  const handleCardClick = () => {
+  const handleCardClick = (e) => {
+    const characterName =
+      e.target.closest(".character-card").dataset.characterName;
     shuffleArray(selectedCharacters);
+    keepScore(characterName);
+    const status = gameState(characterName);
+    if (status === "stop") return;
+  };
+
+  // Handle Difficulty Click
+  const handleDifficultyClick = (e) => {
+    setDifficulty(e.target.dataset["difficulty"]);
+  };
+
+  // Handle Reset Click
+  const handleResetClick = () => {
+    setScore(0);
   };
 
   return (
     <>
       <Header>
-        <Button text='Reset'></Button>
+        <Scoreboard score={score} highScore={highScore} />
+        <Button text='Reset' onClick={handleResetClick}></Button>
+        <ButtonGroup>
+          <Button
+            text='Easy'
+            dataAttrs={{ "data-difficulty": "easy" }}
+            onClick={handleDifficultyClick}
+          ></Button>
+          <Button
+            text='Medium'
+            dataAttrs={{ "data-difficulty": "medium" }}
+            onClick={handleDifficultyClick}
+          ></Button>
+          <Button
+            text='Hard'
+            dataAttrs={{ "data-difficulty": "hard" }}
+            onClick={handleDifficultyClick}
+          ></Button>
+        </ButtonGroup>
       </Header>
       <div>
         <p>
