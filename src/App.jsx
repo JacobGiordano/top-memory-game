@@ -143,30 +143,40 @@ function App() {
   const keepScore = (characterName) => {
     setClickedCards([...clickedCards, characterName]);
     setScore(score + 1);
+    if (highScore <= score) setHighScore(highScore + 1);
   };
 
   // Check for win condition
   const gameState = (characterName) => {
-    let status = "continue";
-    if (selectedCharacters && score === selectedCharacters.length) {
-      alert("You win!");
-      return "stop";
+    let game = {};
+    if (
+      selectedCharacters &&
+      !clickedCards.includes(characterName) &&
+      score === selectedCharacters.length - 1
+    ) {
+      game.status = "win";
+      game.message = "You win!";
+    } else if (clickedCards.includes(characterName)) {
+      game.status = "lose";
+      game.message = "Game over";
     }
-    if (clickedCards.includes(characterName)) {
-      alert("Game over");
-      return "stop";
-    }
-    return status;
+    return game;
   };
 
   // Handle Card Clicks
   const handleCardClick = (e) => {
     const characterName =
       e.target.closest(".character-card").dataset.characterName;
-    shuffleArray(selectedCharacters);
+    const game = gameState(characterName);
+    if (game && (game.status === "win" || game.status === "lose")) {
+      if (game.status === "win") {
+        keepScore(characterName);
+      }
+      alert(game.message);
+      return;
+    }
     keepScore(characterName);
-    const status = gameState(characterName);
-    if (status === "stop") return;
+    shuffleArray(selectedCharacters);
   };
 
   // Handle Difficulty Click
@@ -177,6 +187,7 @@ function App() {
   // Handle Reset Click
   const handleResetClick = () => {
     setScore(0);
+    setClickedCards([]);
   };
 
   return (
