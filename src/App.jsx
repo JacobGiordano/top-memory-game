@@ -183,6 +183,8 @@ function App() {
   // Handle Difficulty Click
   const handleDifficultyClick = (e) => {
     setDifficulty(e.target.dataset["difficulty"]);
+    handleResetClick();
+    getCharactersForCards();
   };
 
   // Handle Reset Click
