@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
 import Button from "./components/Button/Button";
 import CardContainer from "./components/CardContainer/CardContainer";
 import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
 import Scoreboard from "./components/Scoreboard/Scoreboard";
 import Modal from "./components/Modal/Modal";
+import BgVideo from "./components/BgVideo/BgVideo";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -227,19 +230,23 @@ function App() {
         </ButtonGroup>
         <Button onClick={toggleModal} text='Toggle modal' />
       </Header>
-      <div>
-        <p>
-          <Button text='Get characters' onClick={getCharactersForCards} />
-        </p>
-        <p>
-          <Button text='Shuffle characters' onClick={handleCardClick} />
-        </p>
-      </div>
-      <CardContainer
-        characterData={selectedCharacters}
-        handleCardClick={handleCardClick}
-      />
-      <Modal></Modal>
+      <Main>
+        <div>
+          <p>
+            <Button text='Get characters' onClick={getCharactersForCards} />
+          </p>
+          <p>
+            <Button text='Shuffle characters' onClick={handleCardClick} />
+          </p>
+        </div>
+        <CardContainer
+          characterData={selectedCharacters}
+          handleCardClick={handleCardClick}
+        />
+        <Modal></Modal>
+      </Main>
+      <Footer></Footer>
+      <BgVideo />
     </>
   );
 }
