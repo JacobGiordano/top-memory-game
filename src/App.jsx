@@ -5,6 +5,7 @@ import Button from "./components/Button/Button";
 import CardContainer from "./components/CardContainer/CardContainer";
 import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
 import Scoreboard from "./components/Scoreboard/Scoreboard";
+import Modal from "./components/Modal/Modal";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -190,6 +191,16 @@ function App() {
     setClickedCards([]);
   };
 
+  // Toggle modal
+  const toggleModal = () => {
+    const modal = document.querySelector("dialog.modal");
+    if (modal.open) {
+      modal.hideModal();
+    } else {
+      modal.showModal();
+    }
+  };
+
   return (
     <>
       <Header>
@@ -212,6 +223,7 @@ function App() {
             onClick={handleDifficultyClick}
           ></Button>
         </ButtonGroup>
+        <Button onClick={toggleModal} text='Toggle modal' />
       </Header>
       <div>
         <p>
@@ -220,11 +232,12 @@ function App() {
         <p>
           <Button text='Shuffle characters' onClick={handleCardClick} />
         </p>
-        <CardContainer
-          characterData={selectedCharacters}
-          handleCardClick={handleCardClick}
-        />
       </div>
+      <CardContainer
+        characterData={selectedCharacters}
+        handleCardClick={handleCardClick}
+      />
+      <Modal></Modal>
     </>
   );
 }
