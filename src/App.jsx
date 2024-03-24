@@ -5,9 +5,7 @@ import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import Button from "./components/Button/Button";
 import CardContainer from "./components/CardContainer/CardContainer";
-import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
 import Scoreboard from "./components/Scoreboard/Scoreboard";
-import Modal from "./components/Modal/Modal";
 import BgVideo from "./components/BgVideo/BgVideo";
 import TitleScreen from "./components/TitleScreen/TitleScreen";
 import WinningScreen from "./components/WinningScreen/WinningScreen";
@@ -224,24 +222,27 @@ function App() {
   return (
     <>
       <Header>
-        <Scoreboard score={score} highScore={highScore} />
-        <Button text='Reset' onClick={handleResetClick}></Button>
         <Button
           onClick={() => toggleModal(".title-screen")}
           text='Title screen'
         />
-        <Button onClick={() => toggleModal(".you-win")} text='You win' />
-        <Button onClick={() => toggleModal(".you-lose")} text='You lose' />
+        <Scoreboard
+          score={score}
+          highScore={highScore}
+          handleResetClick={handleResetClick}
+        />
+        {/* <Button onClick={() => toggleModal(".you-win")} text='You win' />
+        <Button onClick={() => toggleModal(".you-lose")} text='You lose' /> */}
       </Header>
       <Main>
-        <div>
+        {/* <div>
           <p>
             <Button text='Get characters' onClick={getCharactersForCards} />
           </p>
           <p>
             <Button text='Shuffle characters' onClick={handleCardClick} />
           </p>
-        </div>
+        </div> */}
         <CardContainer
           characterData={selectedCharacters}
           handleCardClick={handleCardClick}

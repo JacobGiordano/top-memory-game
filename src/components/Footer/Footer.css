@@ -1,5 +1,8 @@
 .footer {
   display: block;
-  position: relative;
+  position: absolute;
+  width: 100%;
+  padding: 1rem 0;
+  bottom: 0;
   z-index: 1;
 }
