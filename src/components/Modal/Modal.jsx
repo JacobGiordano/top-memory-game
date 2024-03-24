@@ -1,10 +1,16 @@
 import "./Modal.css";
 
-function Modal({ children }) {
+function Modal({ children, classString, toggleModal }) {
+  const closeModal = (e) => {
+    const modal = e.target.closest("dialog");
+    if (!modal.contains(e.target)) {
+      toggleModal(modal.classList);
+    }
+  };
+  const classes = classString ? classString : null;
   return (
-    <dialog className='modal'>
-      Modal
-      <div>{children}</div>
+    <dialog className={classes} onClick={(e) => closeModal(e)}>
+      <div className='modal-content'>{children}</div>
     </dialog>
   );
 }

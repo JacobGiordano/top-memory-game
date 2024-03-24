@@ -9,6 +9,9 @@ import ButtonGroup from "./components/ButtonGroup/ButtonGroup";
 import Scoreboard from "./components/Scoreboard/Scoreboard";
 import Modal from "./components/Modal/Modal";
 import BgVideo from "./components/BgVideo/BgVideo";
+import TitleScreen from "./components/TitleScreen/TitleScreen";
+import WinningScreen from "./components/WinningScreen/WinningScreen";
+import LosingScreen from "./components/LosingScreen/LosingScreen";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -59,7 +62,7 @@ function App() {
     return () => {
       controller.abort;
     };
-  }, [characters, difficulty]);
+  }, [difficulty]);
 
   // Get random number within specified range
   const getRandom = (min, max) => {
@@ -159,10 +162,8 @@ function App() {
       score === selectedCharacters.length - 1
     ) {
       game.status = "win";
-      game.message = "You win!";
     } else if (clickedCards.includes(characterName)) {
       game.status = "lose";
-      game.message = "Game over";
     }
     return game;
   };
@@ -176,7 +177,7 @@ function App() {
       if (game.status === "win") {
         keepScore(characterName);
       }
-      alert(game.message);
+      toggleModal(`.you-${game.status}`);
       return;
     }
     keepScore(characterName);
@@ -188,6 +189,7 @@ function App() {
     setDifficulty(e.target.dataset["difficulty"]);
     handleResetClick();
     getCharactersForCards();
+    toggleModal(e.target.closest("dialog").classList);
   };
 
   // Handle Reset Click
@@ -196,13 +198,26 @@ function App() {
     setClickedCards([]);
   };
 
+  // Handle Play Again Click
+  const handlePlayAgainClick = (e) => {
+    handleResetClick();
+    getCharactersForCards();
+    toggleModal(e.target.closest("dialog").classList);
+  };
+
   // Toggle modal
-  const toggleModal = () => {
-    const modal = document.querySelector("dialog.modal");
-    if (modal.open) {
-      modal.hideModal();
-    } else {
-      modal.showModal();
+  const toggleModal = (modalSelector) => {
+    const modal = document.querySelector(modalSelector);
+    [...document.querySelectorAll("dialog")].map((dialog) =>
+      dialog !== modal ? dialog.close() : null
+    );
+    if (modal) {
+      if (modal.open) {
+        modal.close();
+      } else {
+        modal.showModal();
+        console.log(`Opened '.${modal.classList}'`);
+      }
     }
   };
 
@@ -211,24 +226,12 @@ function App() {
       <Header>
         <Scoreboard score={score} highScore={highScore} />
         <Button text='Reset' onClick={handleResetClick}></Button>
-        <ButtonGroup>
-          <Button
-            text='Easy'
-            dataAttrs={{ "data-difficulty": "easy" }}
-            onClick={handleDifficultyClick}
-          ></Button>
-          <Button
-            text='Medium'
-            dataAttrs={{ "data-difficulty": "medium" }}
-            onClick={handleDifficultyClick}
-          ></Button>
-          <Button
-            text='Hard'
-            dataAttrs={{ "data-difficulty": "hard" }}
-            onClick={handleDifficultyClick}
-          ></Button>
-        </ButtonGroup>
-        <Button onClick={toggleModal} text='Toggle modal' />
+        <Button
+          onClick={() => toggleModal(".title-screen")}
+          text='Title screen'
+        />
+        <Button onClick={() => toggleModal(".you-win")} text='You win' />
+        <Button onClick={() => toggleModal(".you-lose")} text='You lose' />
       </Header>
       <Main>
         <div>
@@ -243,7 +246,18 @@ function App() {
           characterData={selectedCharacters}
           handleCardClick={handleCardClick}
         />
-        <Modal></Modal>
+        <TitleScreen
+          handleDifficultyClick={handleDifficultyClick}
+          toggleModal={toggleModal}
+        />
+        <WinningScreen
+          toggleModal={toggleModal}
+          handlePlayAgainClick={handlePlayAgainClick}
+        />
+        <LosingScreen
+          toggleModal={toggleModal}
+          handlePlayAgainClick={handlePlayAgainClick}
+        />
       </Main>
       <Footer></Footer>
       <BgVideo />
