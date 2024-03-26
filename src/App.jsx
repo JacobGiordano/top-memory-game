@@ -11,6 +11,7 @@ import TitleScreen from "./components/TitleScreen/TitleScreen";
 import WinningScreen from "./components/WinningScreen/WinningScreen";
 import LosingScreen from "./components/LosingScreen/LosingScreen";
 import Confirm from "./components/Confirm/Confirm";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -225,6 +226,18 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (characters.length > 0) {
+      document.querySelector(".title-screen").showModal();
+    } else {
+      document.querySelector(".loading-screen").showModal();
+    }
+
+    return () => {
+      //
+    };
+  }, [characters]);
+
   return (
     <>
       <Header>
@@ -256,6 +269,7 @@ function App() {
           toggleModal={toggleModal}
           handlePlayAgainClick={handlePlayAgainClick}
         />
+        <LoadingScreen toggleModal={toggleModal} />
       </Main>
       <Footer></Footer>
       <BgVideo />
