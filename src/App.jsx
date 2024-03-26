@@ -185,20 +185,20 @@ function App() {
   // Handle Difficulty Click
   const handleDifficultyClick = (e) => {
     setDifficulty(e.target.dataset["difficulty"]);
-    handleResetClick();
+    resetGame();
     getCharactersForCards();
     toggleModal(e.target.closest("dialog").classList);
   };
 
-  // Handle Reset Click
-  const handleResetClick = () => {
+  // Reset Game
+  const resetGame = () => {
     setScore(0);
     setClickedCards([]);
   };
 
   // Handle Play Again Click
   const handlePlayAgainClick = (e) => {
-    handleResetClick();
+    resetGame();
     getCharactersForCards();
     toggleModal(e.target.closest("dialog").classList);
   };
