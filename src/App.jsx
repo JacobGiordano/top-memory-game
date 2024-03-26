@@ -10,6 +10,7 @@ import BgVideo from "./components/BgVideo/BgVideo";
 import TitleScreen from "./components/TitleScreen/TitleScreen";
 import WinningScreen from "./components/WinningScreen/WinningScreen";
 import LosingScreen from "./components/LosingScreen/LosingScreen";
+import Confirm from "./components/Confirm/Confirm";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -203,6 +204,11 @@ function App() {
     toggleModal(e.target.closest("dialog").classList);
   };
 
+  // Handle Quit Game Click
+  const handleQuitClick = () => {
+    toggleModal(".confirm-choice");
+  };
+
   // Toggle modal
   const toggleModal = (modalSelector) => {
     const modal = document.querySelector(modalSelector);
@@ -226,23 +232,10 @@ function App() {
           onClick={() => toggleModal(".title-screen")}
           text='Title screen'
         />
-        <Scoreboard
-          score={score}
-          highScore={highScore}
-          handleResetClick={handleResetClick}
-        />
-        {/* <Button onClick={() => toggleModal(".you-win")} text='You win' />
-        <Button onClick={() => toggleModal(".you-lose")} text='You lose' /> */}
+        <Scoreboard score={score} highScore={highScore} resetGame={resetGame} />
+        <Button text='Quit game' onClick={handleQuitClick}></Button>
       </Header>
       <Main>
-        {/* <div>
-          <p>
-            <Button text='Get characters' onClick={getCharactersForCards} />
-          </p>
-          <p>
-            <Button text='Shuffle characters' onClick={handleCardClick} />
-          </p>
-        </div> */}
         <CardContainer
           characterData={selectedCharacters}
           handleCardClick={handleCardClick}
@@ -256,6 +249,10 @@ function App() {
           handlePlayAgainClick={handlePlayAgainClick}
         />
         <LosingScreen
+          toggleModal={toggleModal}
+          handlePlayAgainClick={handlePlayAgainClick}
+        />
+        <Confirm
           toggleModal={toggleModal}
           handlePlayAgainClick={handlePlayAgainClick}
         />
