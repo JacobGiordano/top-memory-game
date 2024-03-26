@@ -229,6 +229,7 @@ function App() {
   useEffect(() => {
     if (characters.length > 0) {
       document.querySelector(".title-screen").showModal();
+      document.querySelector(".loading-screen").close();
     } else {
       document.querySelector(".loading-screen").showModal();
     }
