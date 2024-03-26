@@ -1,7 +1,6 @@
 import "./Scoreboard.css";
-import Button from "../Button/Button";
 
-function Scoreboard({ score, highScore, handleResetClick }) {
+function Scoreboard({ score, highScore }) {
   return (
     <div className='scoreboard'>
       <div className='score'>
@@ -11,7 +10,6 @@ function Scoreboard({ score, highScore, handleResetClick }) {
       <div className='high-score'>
         <span>High Score: {highScore}</span>
       </div>
-      <Button text='Reset' onClick={handleResetClick}></Button>
     </div>
   );
 }
