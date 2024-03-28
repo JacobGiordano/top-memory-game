@@ -15,6 +15,7 @@ import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 
 function App() {
   const [characters, setCharacters] = useState([]);
+  const [comics, setComics] = useState([]);
   const [selectedCharacters, setSelectedCharacters] = useState([]);
   const [difficulty, setDifficulty] = useState("");
   const [clickedCards, setClickedCards] = useState([]);
@@ -24,10 +25,8 @@ function App() {
   // Fetching character data
   useEffect(() => {
     const controller = new AbortController();
-    const fetchData = async () => {
-      const url = `https://gateway.marvel.com:443/v1/public/events/270/characters?limit=100&apikey=${
-        import.meta.env.VITE_API_KEY
-      }`;
+    const fetchData = async (endpoint, stateToUpdate) => {
+      const url = endpoint;
       await fetch(url, {
         method: "GET",
         headers: {
@@ -36,11 +35,24 @@ function App() {
       })
         .then((resp) => resp.json())
         .then(function (res) {
-          setCharacters(res.data.results);
+          const data = res.data.results;
+          stateToUpdate(data);
+          console.log(data);
         });
     };
     try {
-      fetchData();
+      fetchData(
+        `https://gateway.marvel.com:443/v1/public/events/270/comics?limit=100&apikey=${
+          import.meta.env.VITE_API_KEY
+        }`,
+        setComics
+      );
+      fetchData(
+        `https://gateway.marvel.com:443/v1/public/events/270/characters?limit=100&apikey=${
+          import.meta.env.VITE_API_KEY
+        }`,
+        setCharacters
+      );
     } catch (error) {
       console.error(error);
     }
@@ -227,9 +239,31 @@ function App() {
   };
 
   useEffect(() => {
+    const comicEntries = [...new Set(comics)].reverse();
+    if (comicEntries.length > 0) {
+      for (let i = 1; i <= comicEntries.length; i++) {
+        const logoBgImg = document.querySelector(".logo-bg-img");
+        setTimeout(function () {
+          console.log("comicEntries");
+          if (comicEntries[i] && comicEntries[i].images) {
+            console.log(comicEntries[i].title);
+            logoBgImg.src = `${comicEntries[i].images[0].path}.${comicEntries[i].images[0].extension}`;
+          }
+        }, i * 200);
+      }
+    }
+    return () => {
+      //
+    };
+  }, [comics]);
+
+  useEffect(() => {
     if (characters.length > 0) {
-      document.querySelector(".title-screen").showModal();
-      document.querySelector(".loading-screen").close();
+      const delay = setTimeout(() => {
+        document.querySelector(".title-screen").showModal();
+        document.querySelector(".loading-screen").close();
+        clearTimeout(delay);
+      }, 3000);
     } else {
       document.querySelector(".loading-screen").showModal();
     }
