@@ -244,12 +244,10 @@ function App() {
       for (let i = 1; i <= comicEntries.length; i++) {
         const logoBgImg = document.querySelector(".logo-bg-img");
         setTimeout(function () {
-          console.log("comicEntries");
           if (comicEntries[i] && comicEntries[i].images) {
-            console.log(comicEntries[i].title);
             logoBgImg.src = `${comicEntries[i].images[0].path}.${comicEntries[i].images[0].extension}`;
           }
-        }, i * 200);
+        }, i * 150);
       }
     }
     return () => {
@@ -263,8 +261,9 @@ function App() {
         document.querySelector(".title-screen").showModal();
         document.querySelector(".loading-screen").close();
         clearTimeout(delay);
-      }, 3000);
+      }, 5500);
     } else {
+      document.querySelector(".loading-screen").classList.add("animate");
       document.querySelector(".loading-screen").showModal();
     }
 
