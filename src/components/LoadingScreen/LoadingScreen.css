@@ -1,9 +1,16 @@
 dialog.loading-screen {
   background: transparent;
   position: relative;
+  border: none;
+  cursor: none;
+  outline: none;
   overflow: hidden;
   pointer-events: none;
-  cursor: none;
+}
+
+dialog.loading-screen .modal-content {
+  padding: 0;
+  border: none;
   outline: none;
 }
 
@@ -39,7 +46,7 @@ dialog.loading-screen .logo-bg-img {
   position: absolute;
   width: 100%;
   height: auto;
-  top: -50%;
+  top: -100%;
   left: 0;
   margin: 0;
   padding: 0;
