@@ -257,8 +257,8 @@ function App() {
   useEffect(() => {
     if (characters.length > 0) {
       const delay = setTimeout(() => {
-        // document.querySelector(".title-screen").showModal();
-        // document.querySelector(".loading-screen").close();
+        document.querySelector(".title-screen").showModal();
+        document.querySelector(".loading-screen").close();
         clearTimeout(delay);
       }, 5500);
     } else {
