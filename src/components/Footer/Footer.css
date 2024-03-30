@@ -1,0 +1,18 @@
+.footer {
+  display: block;
+  position: absolute;
+  width: 100%;
+  padding: 1rem 2rem;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.footer-content {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}

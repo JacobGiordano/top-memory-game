@@ -1,0 +1,11 @@
+dialog {
+  padding: 0;
+}
+
+dialog::backdrop {
+  cursor: pointer;
+}
+
+.modal-content {
+  padding: 2rem;
+}

@@ -1,0 +1,55 @@
+dialog.loading-screen {
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+  cursor: none;
+  outline: none;
+}
+
+@keyframes logoFill {
+  0% {
+    background: #000;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    background: #f0141e; /* Marvel red… */
+    opacity: 1;
+  }
+}
+
+dialog.loading-screen.animate::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background: #000; /* Marvel red… */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  animation: 5.5s forwards 0.75s ease-in-out logoFill;
+  transform-origin: top center;
+  z-index: -1;
+}
+
+dialog.loading-screen .logo-bg-img {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: -50%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: -2;
+}
+
+svg {
+  display: block;
+  fill: white;
+  box-shadow: 0 0 0 2rem;
+  width: 100%;
+  height: auto;
+}
