@@ -289,7 +289,12 @@ function App() {
         <TitleScreen
           handleDifficultyClick={handleDifficultyClick}
           toggleModal={toggleModal}
-        />
+        >
+          <img
+            className='title-screen-logo'
+            src='../src/assets/images/Secret-Wars_1984-1985.webp'
+          ></img>
+        </TitleScreen>
         <WinningScreen
           toggleModal={toggleModal}
           handlePlayAgainClick={handlePlayAgainClick}

@@ -1,5 +1,6 @@
 dialog {
   padding: 0;
+  background: #121212;
 }
 
 dialog::backdrop {

@@ -1,0 +1,12 @@
+dialog.title-screen[open] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+dialog.title-screen .title-screen-logo {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}

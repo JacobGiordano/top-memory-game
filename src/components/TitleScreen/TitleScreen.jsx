@@ -3,9 +3,10 @@ import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Button from "../Button/Button";
 import "./TitleScreen.css";
 
-function TitleScreen({ handleDifficultyClick, toggleModal }) {
+function TitleScreen({ children, handleDifficultyClick, toggleModal }) {
   return (
     <Modal classString='title-screen' toggleModal={toggleModal}>
+      {children}
       <ButtonGroup>
         <Button
           text='Easy'
