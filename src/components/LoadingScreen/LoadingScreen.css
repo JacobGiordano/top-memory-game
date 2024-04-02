@@ -6,12 +6,28 @@ dialog.loading-screen {
   outline: none;
   overflow: hidden;
   pointer-events: none;
+  opacity: 0;
+  animation: 6s forwards ease-in-out logoTransition;
 }
 
 dialog.loading-screen .modal-content {
   padding: 0;
   border: none;
   outline: none;
+}
+
+@keyframes logoTransition {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes logoFill {
@@ -28,6 +44,15 @@ dialog.loading-screen .modal-content {
   }
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 dialog.loading-screen.animate::after {
   content: "";
   display: block;
@@ -39,6 +64,10 @@ dialog.loading-screen.animate::after {
   animation: 5.5s forwards 0.75s ease-in-out logoFill;
   transform-origin: top center;
   z-index: -1;
+}
+
+dialog.loading-screen.animate.fade-out {
+  animation: 0.25s forwards ease-in-out fadeOut;
 }
 
 dialog.loading-screen .logo-bg-img {

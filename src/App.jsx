@@ -257,8 +257,12 @@ function App() {
   useEffect(() => {
     if (characters.length > 0) {
       const delay = setTimeout(() => {
-        document.querySelector(".title-screen").showModal();
-        document.querySelector(".loading-screen").close();
+        document.querySelector(".loading-screen").classList.add("fade-out");
+        const closeTimer = setTimeout(() => {
+          document.querySelector(".title-screen").showModal();
+          document.querySelector(".loading-screen").close();
+          clearTimeout(closeTimer);
+        }, 1000);
         clearTimeout(delay);
       }, 5500);
     } else {
