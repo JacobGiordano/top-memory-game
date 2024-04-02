@@ -1,11 +1,24 @@
 .header {
   display: flex;
   position: sticky;
-  top: 0;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  padding: 1rem 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 1rem;
+  top: 0;
   z-index: 2;
+  flex: 1 1 0;
+}
+
+.header .header-logo {
+  display: none;
+  width: 100%;
+  max-width: 150px;
+}
+
+@media screen and (min-width: 500px) {
+  .header .header-logo {
+    display: block;
+  }
 }

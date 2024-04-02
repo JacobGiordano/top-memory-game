@@ -12,6 +12,7 @@ import WinningScreen from "./components/WinningScreen/WinningScreen";
 import LosingScreen from "./components/LosingScreen/LosingScreen";
 import Confirm from "./components/Confirm/Confirm";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import Logo from "./components/Logo/Logo";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -201,6 +202,7 @@ function App() {
     resetGame();
     getCharactersForCards();
     toggleModal(e.target.closest("dialog").classList);
+    document.querySelector(".main").classList.remove("initial");
   };
 
   // Reset Game
@@ -278,12 +280,13 @@ function App() {
   return (
     <>
       <Header>
-        <Button
-          onClick={() => toggleModal(".title-screen")}
-          text='Title screen'
+        <Logo
+          classString={"header-logo"}
+          fileDirectory={"images"}
+          fileNameWithExtension={"Secret-Wars_1984-1985.webp"}
         />
         <Scoreboard score={score} highScore={highScore} resetGame={resetGame} />
-        <Button text='Quit game' onClick={handleQuitClick}></Button>
+        <Button text='Quit' onClick={handleQuitClick}></Button>
       </Header>
       <Main>
         <CardContainer
@@ -293,12 +296,7 @@ function App() {
         <TitleScreen
           handleDifficultyClick={handleDifficultyClick}
           toggleModal={toggleModal}
-        >
-          <img
-            className='title-screen-logo'
-            src='../src/assets/images/Secret-Wars_1984-1985.webp'
-          ></img>
-        </TitleScreen>
+        />
         <WinningScreen
           toggleModal={toggleModal}
           handlePlayAgainClick={handlePlayAgainClick}

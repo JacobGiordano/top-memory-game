@@ -14,7 +14,7 @@ function Footer({ children }) {
             Marvel
           </a>
           {". "}
-          All images, logos, and characters belong to and are copyrightten by{" "}
+          All images, logos, and characters belong to and are copywritten by{" "}
           <a href='http://marvel.com' target='_blank'>
             Marvel
           </a>

@@ -6,6 +6,7 @@
   background: red;
   border: 1px solid red;
   border-radius: 0.5rem;
+  width: 8rem;
   max-width: 12rem;
   cursor: pointer;
   overflow: hidden;

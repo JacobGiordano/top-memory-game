@@ -7,6 +7,11 @@ dialog::backdrop {
   cursor: pointer;
 }
 
+dialog.no-toggle::backdrop {
+  pointer-events: none;
+}
+
 .modal-content {
+  width: 100%;
   padding: 2rem;
 }
