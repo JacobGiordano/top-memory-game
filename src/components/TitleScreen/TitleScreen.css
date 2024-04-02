@@ -4,7 +4,6 @@ dialog.title-screen[open] {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 2rem;
 }
 
 dialog.title-screen .marvel-logo,
@@ -12,7 +11,6 @@ dialog.title-screen .title-screen-logo {
   width: 100%;
   max-width: 600px;
   height: auto;
-  margin-bottom: 1rem;
 }
 
 dialog.title-screen .marvel-logo {
@@ -20,15 +18,23 @@ dialog.title-screen .marvel-logo {
   box-shadow: none;
   max-width: 80px;
   margin: 0 auto 0.5rem;
+  fill: #f0141e; /* Marvel red… */
 }
 
-dialog.title-screen .marvel-logo::after {
-  content: "";
+dialog.title-screen .marvel-logo-wrapper {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+dialog.title-screen .marvel-logo-bg {
   display: block;
   position: absolute;
-  background: #f0141e; /* Marvel red… */
+  background: #fff; /* Marvel red… */
   width: 100%;
-  height: 100%;
+  max-width: 80px;
+  height: 30px;
   top: 0;
   z-index: -1;
 }

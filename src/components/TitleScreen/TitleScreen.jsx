@@ -8,7 +8,10 @@ import MarvelLogo from "../../assets/svg/marvel.svg?react";
 function TitleScreen({ handleDifficultyClick }) {
   return (
     <Modal classString='title-screen no-toggle' noToggle={true}>
-      <MarvelLogo />
+      <div className='marvel-logo-wrapper'>
+        <MarvelLogo />
+        <div className='marvel-logo-bg'></div>
+      </div>
       <Logo
         classString={"title-screen-logo"}
         fileDirectory={"images"}
