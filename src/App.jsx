@@ -202,7 +202,11 @@ function App() {
     resetGame();
     getCharactersForCards();
     toggleModal(e.target.closest("dialog").classList);
-    document.querySelector(".main").classList.remove("initial");
+    if (e.target.dataset["difficulty"] === "hard") {
+      document.querySelector(".main").classList.remove("expand");
+    } else {
+      document.querySelector(".main").classList.add("expand");
+    }
   };
 
   // Reset Game
