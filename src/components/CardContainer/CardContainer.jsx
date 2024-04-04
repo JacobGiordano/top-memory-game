@@ -1,5 +1,6 @@
 import Card from "../Card/Card";
 import "./CardContainer.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 function CardContainer({ characterData, handleCardClick }) {
   let cards = null;
@@ -9,9 +10,14 @@ function CardContainer({ characterData, handleCardClick }) {
         key={i}
         characterData={character}
         handleCardClick={handleCardClick}
+        mapIndex={i}
       ></Card>
     ));
   }
-  return <div className='character-card-container'>{cards}</div>;
+  return (
+    <div className='character-card-container'>
+      <AnimatePresence>{cards}</AnimatePresence>
+    </div>
+  );
 }
 export default CardContainer;

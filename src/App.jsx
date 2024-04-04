@@ -64,16 +64,11 @@ function App() {
 
   // Card creation
   useEffect(() => {
-    const controller = new AbortController();
     const createCards = () => {
       getCharactersForCards();
     };
 
     createCards(characters);
-
-    return () => {
-      controller.abort;
-    };
   }, [difficulty]);
 
   // Get random number within specified range
