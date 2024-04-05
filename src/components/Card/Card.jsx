@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function Card({ characterData, handleCardClick, mapIndex }) {
   const imageUrl = `${characterData.thumbnail.path}.${characterData.thumbnail.extension}`;
-  const cardDelay = 0.125 * mapIndex * Math.random();
+  const cardDelay = 0.1 * mapIndex * Math.random();
 
   const fadeInAnimationVariants = {
     initial: {
@@ -11,24 +11,20 @@ function Card({ characterData, handleCardClick, mapIndex }) {
       y: -100,
       boxShadow: "0 0 .25rem .25rem rgba(255, 255, 255, .5)",
     },
-    animate: (mapIndex) => {
-      return {
-        opacity: 1,
-        y: 0,
-        boxShadow: "none",
-        transition: {
-          delay: cardDelay,
-        },
-      };
+    animate: {
+      opacity: 1,
+      y: 0,
+      boxShadow: "none",
+      transition: {
+        delay: cardDelay,
+      },
     },
-    exit: (mapIndex) => {
-      return {
-        opacity: 0,
-        y: 100,
-        transition: {
-          delay: cardDelay,
-        },
-      };
+    exit: {
+      opacity: 0,
+      y: 100,
+      transition: {
+        delay: cardDelay,
+      },
     },
   };
 
@@ -42,37 +38,44 @@ function Card({ characterData, handleCardClick, mapIndex }) {
       height: "100%",
       opacity: 1,
     },
-    animate: (mapIndex) => {
-      return {
-        display: "none",
-        opacity: 0,
-        border: "2px solid white",
-        transition: {
-          delay: cardDelay * 1.5,
-        },
-      };
+    animate: {
+      display: "none",
+      opacity: 0,
+      border: "2px solid white",
+      transition: {
+        delay: cardDelay * 1.5,
+      },
+    },
+    exit: {
+      display: "block",
+      opacity: 1,
+      border: "2px solid white",
+      transition: {
+        delay: cardDelay * 1.5,
+      },
     },
   };
 
   return (
     <div className='character-card-wrapper'>
-      <AnimatePresence>
+      <AnimatePresence key={`${characterData.name}-${mapIndex}`}>
         <motion.div
           className='character-card'
           data-character-name={characterData.name}
           onClick={handleCardClick}
           variants={fadeInAnimationVariants}
-          custom={mapIndex}
           initial='initial'
           animate='animate'
           exit='exit'
-          data-index={mapIndex}
+          key={`card-wrapper-${mapIndex}`}
         >
-          <AnimatePresence>
+          <AnimatePresence key={`${characterData.name}-${mapIndex}`}>
             <motion.span
               variants={imgCoverVariants}
-              initial={"initial"}
-              animate={"animate"}
+              initial='initial'
+              animate='animate'
+              exit='exit'
+              key={`white-cover-${mapIndex}`}
             ></motion.span>
           </AnimatePresence>
           <img
