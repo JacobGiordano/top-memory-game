@@ -1,5 +1,6 @@
 :root {
-  --card-color: rgba(0, 0, 0, 0.75);
+  --color-dark: #000;
+  --color-light: #fff;
 }
 
 .character-card {
@@ -8,8 +9,8 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  background: var(--card-color);
-  border: 1px solid var(--card-color);
+  background: var(--color-dark);
+  border: 1px solid var(--color-dark);
   border-radius: 0.5rem;
   font-size: 0.85rem;
   width: 8rem;
@@ -17,6 +18,7 @@
   height: 100%;
   cursor: pointer;
   overflow: hidden;
+  padding: 0;
 }
 
 .character-card-image-cover {
@@ -26,6 +28,21 @@
   height: 100%;
   top: 100%;
   left: 100%;
+  pointer-events: none;
+}
+
+.character-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.character-card:focus-visible {
+  outline: auto;
+  outline-color: var(--color-light);
+}
+
+.character-card * {
+  user-select: none;
 }
 
 .character-card-image {

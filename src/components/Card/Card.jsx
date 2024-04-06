@@ -59,7 +59,7 @@ function Card({ characterData, handleCardClick, mapIndex }) {
   return (
     <div className='character-card-wrapper'>
       <AnimatePresence key={`${characterData.name}-${mapIndex}`}>
-        <motion.div
+        <motion.button
           className='character-card'
           data-character-name={characterData.name}
           onClick={handleCardClick}
@@ -85,7 +85,7 @@ function Card({ characterData, handleCardClick, mapIndex }) {
             draggable='false'
           />
           <div className='character-card-name'>{characterData.name}</div>
-        </motion.div>
+        </motion.button>
       </AnimatePresence>
     </div>
   );

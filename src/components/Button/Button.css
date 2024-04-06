@@ -1,4 +1,4 @@
-button {
+button:not(.character-card) {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -13,6 +13,7 @@ button {
   border: 3px solid #121212;
   transition: all ease-in-out 0.2s;
 }
+
 button:hover,
 button:focus,
 button:focus-visible {
