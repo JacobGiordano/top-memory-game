@@ -130,6 +130,14 @@ function App() {
     return true;
   };
 
+  const isCompletelyDifferent = (array) => {
+    let status = true;
+    for (let i = 0; i < array.length; i++) {
+      array[i] === selectedCharacters[i] ? (status = false) : null;
+    }
+    return status;
+  };
+
   // Shuffle the order of an array's entries
   const shuffleArray = (array) => {
     const shuffledArray = [];
@@ -145,7 +153,10 @@ function App() {
       }
     }
 
-    if (!arrayIsTheSame(array, shuffledArray)) {
+    if (
+      !arrayIsTheSame(array, shuffledArray) &&
+      isCompletelyDifferent(shuffledArray)
+    ) {
       setSelectedCharacters(shuffledArray);
       return;
     }
@@ -250,9 +261,6 @@ function App() {
         }, i * 150);
       }
     }
-    return () => {
-      //
-    };
   }, [comics]);
 
   useEffect(() => {
@@ -310,7 +318,7 @@ function App() {
         />
         <LoadingScreen toggleModal={toggleModal} />
       </Main>
-      <Footer></Footer>
+      <Footer />
       <BgVideo />
     </>
   );
