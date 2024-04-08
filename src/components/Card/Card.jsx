@@ -69,15 +69,14 @@ function Card({ characterData, handleCardClick, mapIndex }) {
           exit='exit'
           key={`card-wrapper-${mapIndex}`}
         >
-          <AnimatePresence key={`${characterData.name}-${mapIndex}`}>
-            <motion.span
-              variants={imgCoverVariants}
-              initial='initial'
-              animate='animate'
-              exit='exit'
-              key={`white-cover-${mapIndex}`}
-            ></motion.span>
-          </AnimatePresence>
+          <motion.span
+            variants={imgCoverVariants}
+            initial='initial'
+            animate='animate'
+            exit='exit'
+            key={`white-cover-${mapIndex}`}
+          ></motion.span>
+
           <img
             src={imageUrl}
             alt={characterData.name}
