@@ -8,8 +8,7 @@ function CardContainer({ characterData, handleCardClick }) {
       {characterData[0] &&
         characterData.map((character, i) => {
           const imageUrl = `${character.thumbnail.path}.${character.thumbnail.extension}`;
-          const cardDelay = 0.07 * i * Math.random();
-          console.log(character, cardDelay);
+          const cardDelay = 0.075 * i * Math.random();
           return (
             <AnimatePresence key={i} mode='wait'>
               <div
@@ -24,12 +23,19 @@ function CardContainer({ characterData, handleCardClick }) {
                   initial={{
                     opacity: 0,
                     y: -100,
-                    boxShadow: "0 0 .25rem .25rem rgba(255, 255, 255, .5)",
+                    background: "rgba(255, 255, 255, 1)",
+                    border: "1px solid #fff",
+                    boxShadow: "0 0 4rem 4rem rgba(255, 255, 255, 1)",
+                    transition: {
+                      delay: cardDelay,
+                    },
                   }}
                   animate={{
                     opacity: 1,
                     y: 0,
-                    boxShadow: "none",
+                    background: "rgba(0,0,0, .75)",
+                    border: "none",
+                    boxShadow: "0 0 1px 1px rgba(0, 0, 0, 1)",
                     transition: {
                       delay: cardDelay,
                     },
@@ -37,6 +43,10 @@ function CardContainer({ characterData, handleCardClick }) {
                   exit={{
                     opacity: 0,
                     y: -100,
+                    background: "rgba(255, 255, 255, 1)",
+                    border: "1px solid #fff",
+                    boxShadow:
+                      "0 0 1px 1px rgba(255, 255, 255, 1), 0 0 .25rem .25rem rgba(255, 255, 255, 1)",
                     transition: {
                       delay: cardDelay,
                     },
@@ -48,7 +58,6 @@ function CardContainer({ characterData, handleCardClick }) {
                       display: "block",
                       position: "absolute",
                       background: "#fff",
-                      border: "2px solid white",
                       width: "100%",
                       height: "100%",
                       opacity: 1,
@@ -56,7 +65,6 @@ function CardContainer({ characterData, handleCardClick }) {
                     animate={{
                       display: "none",
                       opacity: 0,
-                      border: "2px solid white",
                       transition: {
                         delay: cardDelay * 1.5,
                       },
@@ -64,9 +72,8 @@ function CardContainer({ characterData, handleCardClick }) {
                     exit={{
                       display: "block",
                       opacity: 1,
-                      border: "2px solid white",
                       transition: {
-                        delay: cardDelay,
+                        delay: cardDelay * 0.35,
                       },
                     }}
                   ></motion.span>
