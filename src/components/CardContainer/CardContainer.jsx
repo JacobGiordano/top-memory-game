@@ -1,5 +1,5 @@
-import Card from "../Card/Card";
 import "./CardContainer.css";
+import "./Card.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 function CardContainer({ characterData, handleCardClick }) {
@@ -66,7 +66,7 @@ function CardContainer({ characterData, handleCardClick }) {
                       opacity: 1,
                       border: "2px solid white",
                       transition: {
-                        delay: cardDelay * 1.5,
+                        delay: cardDelay,
                       },
                     }}
                   ></motion.span>
