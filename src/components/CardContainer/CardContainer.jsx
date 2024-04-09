@@ -3,6 +3,65 @@ import "./Card.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 function CardContainer({ characterData, handleCardClick }) {
+  const cardAnimations = {
+    initialCard: (cardDelay) => ({
+      opacity: 0,
+      y: -100,
+      background: "rgba(255, 255, 255, 1)",
+      border: "1px solid #fff",
+      boxShadow: "0 0 4rem 4rem rgba(255, 255, 255, 1)",
+      transition: {
+        delay: cardDelay,
+      },
+    }),
+    animateCard: (cardDelay) => ({
+      opacity: 1,
+      y: 0,
+      background: "rgba(0,0,0, .75)",
+      border: "none",
+      boxShadow: "0 0 1px 1px rgba(0, 0, 0, 1)",
+      transition: {
+        delay: cardDelay,
+      },
+    }),
+    exitCard: (cardDelay) => ({
+      opacity: 0,
+      y: -100,
+      background: "rgba(255, 255, 255, 1)",
+      border: "1px solid #fff",
+      boxShadow:
+        "0 0 1px 1px rgba(255, 255, 255, 1), 0 0 .25rem .25rem rgba(255, 255, 255, 1)",
+      transition: {
+        delay: cardDelay,
+      },
+    }),
+  };
+
+  const whiteCoverAnimations = {
+    initialCover: {
+      display: "block",
+      position: "absolute",
+      background: "#fff",
+      width: "100%",
+      height: "100%",
+      opacity: 1,
+    },
+    animateCover: (cardDelay) => ({
+      display: "none",
+      opacity: 0,
+      transition: {
+        delay: cardDelay * 1.5,
+      },
+    }),
+    exitCover: (cardDelay) => ({
+      display: "block",
+      opacity: 1,
+      transition: {
+        delay: cardDelay * 0.35,
+      },
+    }),
+  };
+
   return (
     <div className='character-card-container'>
       {characterData[0] &&
@@ -20,62 +79,19 @@ function CardContainer({ characterData, handleCardClick }) {
                   data-character-name={character.name}
                   onClick={handleCardClick}
                   key={`card-wrapper-${i}`}
-                  initial={{
-                    opacity: 0,
-                    y: -100,
-                    background: "rgba(255, 255, 255, 1)",
-                    border: "1px solid #fff",
-                    boxShadow: "0 0 4rem 4rem rgba(255, 255, 255, 1)",
-                    transition: {
-                      delay: cardDelay,
-                    },
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    background: "rgba(0,0,0, .75)",
-                    border: "none",
-                    boxShadow: "0 0 1px 1px rgba(0, 0, 0, 1)",
-                    transition: {
-                      delay: cardDelay,
-                    },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    y: -100,
-                    background: "rgba(255, 255, 255, 1)",
-                    border: "1px solid #fff",
-                    boxShadow:
-                      "0 0 1px 1px rgba(255, 255, 255, 1), 0 0 .25rem .25rem rgba(255, 255, 255, 1)",
-                    transition: {
-                      delay: cardDelay,
-                    },
-                  }}
+                  variants={cardAnimations}
+                  custom={cardDelay}
+                  initial='initialCard'
+                  animate='animateCard'
+                  exit='exitCard'
                 >
                   <motion.span
                     key={`white-cover-${i}`}
-                    initial={{
-                      display: "block",
-                      position: "absolute",
-                      background: "#fff",
-                      width: "100%",
-                      height: "100%",
-                      opacity: 1,
-                    }}
-                    animate={{
-                      display: "none",
-                      opacity: 0,
-                      transition: {
-                        delay: cardDelay * 1.5,
-                      },
-                    }}
-                    exit={{
-                      display: "block",
-                      opacity: 1,
-                      transition: {
-                        delay: cardDelay * 0.35,
-                      },
-                    }}
+                    variants={whiteCoverAnimations}
+                    custom={cardDelay}
+                    initial='initialCover'
+                    animate='animateCover'
+                    exit='exitCover'
                   ></motion.span>
                   <img
                     src={imageUrl}
