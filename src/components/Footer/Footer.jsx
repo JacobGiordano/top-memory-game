@@ -5,12 +5,15 @@ function Footer({ children }) {
     <footer className='footer'>
       <div className='footer-content'>
         <div className='top-row'>
-          <a
-            href='https://pixabay.com/videos/nebula-gas-galaxy-space-25047/'
-            target='_blank'
-          >
-            Background video by Mikkehouse
-          </a>
+          <span>
+            Background video by{" "}
+            <a
+              href='https://pixabay.com/videos/nebula-gas-galaxy-space-25047/'
+              target='_blank'
+            >
+              Mikkehouse
+            </a>
+          </span>
           <span className='personal-info'>
             View this project on{" "}
             <a
