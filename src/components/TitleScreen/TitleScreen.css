@@ -38,3 +38,23 @@ dialog.title-screen .marvel-logo-bg {
   top: 0;
   z-index: -1;
 }
+
+dialog.title-screen .link-wrapper {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+dialog.title-screen .link-wrapper a {
+  text-decoration: none;
+  padding-bottom: 0.125rem;
+  border-bottom: 1px solid transparent;
+  transition: all ease-in-out 0.2s;
+  color: #fff;
+}
+
+dialog.title-screen .link-wrapper a:hover,
+dialog.title-screen .link-wrapper a:focus {
+  border-color: inherit;
+  padding-bottom: 0.25rem;
+}
