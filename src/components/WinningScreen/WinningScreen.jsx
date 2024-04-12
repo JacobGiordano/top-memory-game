@@ -11,6 +11,13 @@ function WinningScreen({ toggleModal, handlePlayAgainClick }) {
 
   return (
     <Modal classString='you-win' toggleModal={toggleModal}>
+      <div className='img-wrapper'>
+        <img
+          className='winning-img'
+          src='http://i.annihil.us/u/prod/marvel/i/mg/3/e0/51dc771c73749.jpg'
+          alt=''
+        />
+      </div>
       <h2>You Win!</h2>
       <ButtonGroup>
         <Button text='Play again' onClick={handlePlayAgainClick}></Button>

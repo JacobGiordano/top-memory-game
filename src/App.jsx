@@ -300,23 +300,25 @@ function App() {
           characterData={selectedCharacters}
           handleCardClick={handleCardClick}
         />
-        <TitleScreen
-          handleDifficultyClick={handleDifficultyClick}
-          toggleModal={toggleModal}
-        />
-        <WinningScreen
-          toggleModal={toggleModal}
-          handlePlayAgainClick={handlePlayAgainClick}
-        />
-        <LosingScreen
-          toggleModal={toggleModal}
-          handlePlayAgainClick={handlePlayAgainClick}
-        />
-        <Confirm
-          toggleModal={toggleModal}
-          handlePlayAgainClick={handlePlayAgainClick}
-        />
-        <LoadingScreen toggleModal={toggleModal} />
+        <div className='modals'>
+          <TitleScreen
+            handleDifficultyClick={handleDifficultyClick}
+            toggleModal={toggleModal}
+          />
+          <WinningScreen
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+          <LosingScreen
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+          <Confirm
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+          <LoadingScreen toggleModal={toggleModal} />
+        </div>
       </Main>
       <Footer />
       <BgVideo />
