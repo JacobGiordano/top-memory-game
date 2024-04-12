@@ -1,8 +1,10 @@
+import Button from "../Button/Button";
 import "./Footer.css";
 
 function Footer({ children }) {
   return (
     <footer className='footer'>
+      <Button classString={"help-btn"}>?</Button>
       <div className='footer-content'>
         <div className='top-row'>
           <span>
