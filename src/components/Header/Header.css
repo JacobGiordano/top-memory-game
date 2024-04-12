@@ -5,7 +5,7 @@
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem 0.75rem;
   top: 0;
   z-index: 2;
   flex: 1 1 0;
@@ -14,11 +14,15 @@
 .header .header-logo {
   display: none;
   width: 100%;
-  max-width: 150px;
+  max-width: 120px;
 }
 
 @media screen and (min-width: 500px) {
   .header .header-logo {
     display: block;
   }
+}
+
+.header button.quit-btn {
+  font-size: 0.75rem;
 }

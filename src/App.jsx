@@ -293,7 +293,11 @@ function App() {
           fileNameWithExtension={"Secret-Wars_1984-1985.webp"}
         />
         <Scoreboard score={score} highScore={highScore} resetGame={resetGame} />
-        <Button text='Quit' onClick={handleQuitClick}></Button>
+        <Button
+          classString='quit-btn'
+          text='Quit'
+          onClick={handleQuitClick}
+        ></Button>
       </Header>
       <Main>
         <CardContainer
