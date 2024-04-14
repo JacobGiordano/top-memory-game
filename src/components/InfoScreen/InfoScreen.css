@@ -1,0 +1,12 @@
+dialog.info {
+  max-width: 680px;
+}
+
+dialog.info h2 {
+  margin-top: 0;
+}
+
+dialog.info ul li {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}

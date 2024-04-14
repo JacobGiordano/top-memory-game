@@ -5,9 +5,13 @@ import "./TitleScreen.css";
 import Logo from "../Logo/Logo";
 import MarvelLogo from "../../assets/svg/marvel.svg?react";
 
-function TitleScreen({ handleDifficultyClick }) {
+function TitleScreen({ toggleModal, handleDifficultyClick }) {
   return (
-    <Modal classString='title-screen no-toggle' noToggle={true}>
+    <Modal
+      classString='title-screen no-toggle'
+      noToggle={true}
+      toggleModal={toggleModal}
+    >
       <div className='marvel-logo-wrapper'>
         <MarvelLogo />
         <div className='marvel-logo-bg'></div>

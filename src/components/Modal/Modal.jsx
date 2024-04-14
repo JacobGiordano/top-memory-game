@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import "./Modal.css";
 
 function Modal({ children, classString, toggleModal, noToggle }) {
+  const classes = classString ? classString : null;
+
   const closeModal = (e) => {
     const modal = e.target.closest("dialog");
     if (e.target === modal) {
@@ -8,7 +11,12 @@ function Modal({ children, classString, toggleModal, noToggle }) {
     }
   };
 
-  const classes = classString ? classString : null;
+  useEffect(() => {
+    const classSelectors = classString.split(" ").join(".");
+    const selector = `.${classSelectors}`;
+    document.querySelector(selector).showModal();
+  }, []);
+
   return (
     <dialog
       className={classes}

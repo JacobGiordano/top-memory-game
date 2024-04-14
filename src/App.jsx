@@ -13,6 +13,7 @@ import LosingScreen from "./components/LosingScreen/LosingScreen";
 import Confirm from "./components/Confirm/Confirm";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import Logo from "./components/Logo/Logo";
+import InfoScreen from "./components/InfoScreen/InfoScreen";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -22,6 +23,7 @@ function App() {
   const [clickedCards, setClickedCards] = useState([]);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [playState, setPlayState] = useState("");
 
   // Fetching character data
   useEffect(() => {
@@ -194,6 +196,10 @@ function App() {
     if (game && (game.status === "win" || game.status === "lose")) {
       if (game.status === "win") {
         keepScore(characterName);
+        setPlayState("win");
+      }
+      if (game.status === "lose") {
+        setPlayState("lose");
       }
       toggleModal(`.you-${game.status}`);
       return;
@@ -219,6 +225,7 @@ function App() {
   const resetGame = () => {
     setScore(0);
     setClickedCards([]);
+    setPlayState("play");
   };
 
   // Handle Play Again Click
@@ -230,11 +237,12 @@ function App() {
 
   // Handle Quit Game Click
   const handleQuitClick = () => {
+    setPlayState("paused");
     toggleModal(".confirm-choice");
   };
 
   // Toggle modal
-  const toggleModal = (modalSelector) => {
+  const toggleModal = (modalSelector, newPlayState) => {
     const modal = document.querySelector(modalSelector);
     [...document.querySelectorAll("dialog")].map((dialog) =>
       dialog !== modal ? dialog.close() : null
@@ -244,7 +252,9 @@ function App() {
         modal.close();
       } else {
         modal.showModal();
-        console.log(`Opened '.${modal.classList}'`);
+      }
+      if (newPlayState) {
+        setPlayState(newPlayState);
       }
     }
   };
@@ -266,10 +276,12 @@ function App() {
   useEffect(() => {
     if (characters.length > 0) {
       const delay = setTimeout(() => {
-        document.querySelector(".loading-screen").classList.add("fade-out");
+        document.querySelector(".loading-screen") &&
+          document.querySelector(".loading-screen").classList.add("fade-out");
         const closeTimer = setTimeout(() => {
-          document.querySelector(".title-screen").showModal();
-          document.querySelector(".loading-screen").close();
+          setPlayState("reset");
+          document.querySelector(".title-screen") &&
+            document.querySelector(".title-screen").showModal();
           clearTimeout(closeTimer);
         }, 1000);
         clearTimeout(delay);
@@ -305,26 +317,35 @@ function App() {
           handleCardClick={handleCardClick}
         />
         <div className='modals'>
-          <TitleScreen
-            handleDifficultyClick={handleDifficultyClick}
-            toggleModal={toggleModal}
-          />
-          <WinningScreen
-            toggleModal={toggleModal}
-            handlePlayAgainClick={handlePlayAgainClick}
-          />
-          <LosingScreen
-            toggleModal={toggleModal}
-            handlePlayAgainClick={handlePlayAgainClick}
-          />
-          <Confirm
-            toggleModal={toggleModal}
-            handlePlayAgainClick={handlePlayAgainClick}
-          />
-          <LoadingScreen toggleModal={toggleModal} />
+          {playState === "reset" && (
+            <TitleScreen
+              toggleModal={toggleModal}
+              handleDifficultyClick={handleDifficultyClick}
+            />
+          )}
+          {playState === "win" && (
+            <WinningScreen
+              toggleModal={toggleModal}
+              handlePlayAgainClick={handlePlayAgainClick}
+            />
+          )}
+          {playState === "lose" && (
+            <LosingScreen
+              toggleModal={toggleModal}
+              handlePlayAgainClick={handlePlayAgainClick}
+            />
+          )}
+          {playState === "paused" && (
+            <Confirm
+              toggleModal={toggleModal}
+              handlePlayAgainClick={handlePlayAgainClick}
+            />
+          )}
+          {playState === "" && <LoadingScreen toggleModal={toggleModal} />}
+          {playState === "info" && <InfoScreen toggleModal={toggleModal} />}
         </div>
       </Main>
-      <Footer />
+      <Footer toggleModal={toggleModal} setPlayState={setPlayState} />
       <BgVideo />
     </>
   );

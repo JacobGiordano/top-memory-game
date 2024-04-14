@@ -1,10 +1,17 @@
 import Button from "../Button/Button";
 import "./Footer.css";
+import GitHubLogo from "../../assets/svg/github-mark-white.svg?react";
 
-function Footer({ children }) {
+function Footer({ children, toggleModal, setPlayState }) {
+  const handleInfoClick = () => {
+    setPlayState("info");
+    toggleModal(".info");
+  };
   return (
     <footer className='footer'>
-      <Button classString={"help-btn"}>?</Button>
+      <Button classString={"info-btn"} onClick={() => handleInfoClick()}>
+        ?
+      </Button>
       <div className='footer-content'>
         <div className='top-row'>
           <span>
@@ -17,12 +24,13 @@ function Footer({ children }) {
             </a>
           </span>
           <span className='personal-info'>
-            View this project on{" "}
+            View on{" "}
             <a
               href='https://github.com/JacobGiordano/top-memory-game'
               target='_blank'
             >
               Github
+              <GitHubLogo />
             </a>
           </span>
         </div>

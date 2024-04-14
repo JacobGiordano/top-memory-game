@@ -82,7 +82,7 @@ dialog.loading-screen .logo-bg-img {
   z-index: -2;
 }
 
-svg {
+dialog.loading-screen svg {
   display: block;
   fill: white;
   box-shadow: 0 0 0 2rem;

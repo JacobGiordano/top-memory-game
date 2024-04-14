@@ -14,6 +14,7 @@ function CardContainer({ characterData, handleCardClick }) {
         delay: cardDelay,
       },
     }),
+    enterCard: {},
     animateCard: (cardDelay) => ({
       opacity: 1,
       y: 0,
