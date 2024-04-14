@@ -24,7 +24,7 @@ function Footer({ children, toggleModal, setPlayState }) {
             </a>
           </span>
           <span className='personal-info'>
-            View on{" "}
+            View this project on{" "}
             <a
               href='https://github.com/JacobGiordano/top-memory-game'
               target='_blank'
