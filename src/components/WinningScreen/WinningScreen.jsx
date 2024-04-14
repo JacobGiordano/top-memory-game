@@ -10,7 +10,7 @@ function WinningScreen({ toggleModal, handlePlayAgainClick }) {
   };
 
   return (
-    <Modal classString='you-win' toggleModal={toggleModal}>
+    <Modal classString='you-win no-toggle' toggleModal={toggleModal}>
       <div className='img-wrapper'>
         <img
           className='winning-img'

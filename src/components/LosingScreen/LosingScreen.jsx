@@ -10,7 +10,7 @@ function LosingScreen({ toggleModal, handlePlayAgainClick }) {
   };
 
   return (
-    <Modal classString='you-lose' toggleModal={toggleModal}>
+    <Modal classString='you-lose no-toggle' toggleModal={toggleModal}>
       <div className='img-wrapper'>
         <img
           className='losing-img'
