@@ -9,7 +9,11 @@ function Footer({ children, toggleModal, setPlayState }) {
   };
   return (
     <footer className='footer'>
-      <Button classString={"info-btn"} onClick={() => handleInfoClick()}>
+      <Button
+        classString={"info-btn"}
+        text='Info'
+        onClick={() => handleInfoClick()}
+      >
         ?
       </Button>
       <div className='footer-content'>

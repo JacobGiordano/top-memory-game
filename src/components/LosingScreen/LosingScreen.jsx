@@ -5,8 +5,7 @@ import "./LosingScreen.css";
 
 function LosingScreen({ toggleModal, handlePlayAgainClick }) {
   const handleOnClick = (e) => {
-    toggleModal(e.target.closest("dialog").classList);
-    toggleModal(".title-screen");
+    toggleModal(".you-lose", "reset");
   };
 
   return (
