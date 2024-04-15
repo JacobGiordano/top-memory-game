@@ -341,7 +341,7 @@ function App() {
             handlePlayAgainClick={handlePlayAgainClick}
           />
         )}
-        {playState === "" && <LoadingScreen toggleModal={toggleModal} />}
+        {playState === "" && <LoadingScreen />}
         {playState === "info" && <InfoScreen toggleModal={toggleModal} />}
       </Main>
       <Footer toggleModal={toggleModal} setPlayState={setPlayState} />
