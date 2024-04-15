@@ -316,34 +316,33 @@ function App() {
           characterData={selectedCharacters}
           handleCardClick={handleCardClick}
         />
-        <div className='modals'>
-          {playState === "reset" && (
-            <TitleScreen
-              toggleModal={toggleModal}
-              handleDifficultyClick={handleDifficultyClick}
-            />
-          )}
-          {playState === "win" && (
-            <WinningScreen
-              toggleModal={toggleModal}
-              handlePlayAgainClick={handlePlayAgainClick}
-            />
-          )}
-          {playState === "lose" && (
-            <LosingScreen
-              toggleModal={toggleModal}
-              handlePlayAgainClick={handlePlayAgainClick}
-            />
-          )}
-          {playState === "paused" && (
-            <Confirm
-              toggleModal={toggleModal}
-              handlePlayAgainClick={handlePlayAgainClick}
-            />
-          )}
-          {playState === "" && <LoadingScreen toggleModal={toggleModal} />}
-          {playState === "info" && <InfoScreen toggleModal={toggleModal} />}
-        </div>
+
+        {playState === "reset" && (
+          <TitleScreen
+            toggleModal={toggleModal}
+            handleDifficultyClick={handleDifficultyClick}
+          />
+        )}
+        {playState === "win" && (
+          <WinningScreen
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+        )}
+        {playState === "lose" && (
+          <LosingScreen
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+        )}
+        {playState === "paused" && (
+          <Confirm
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+        )}
+        {playState === "" && <LoadingScreen toggleModal={toggleModal} />}
+        {playState === "info" && <InfoScreen toggleModal={toggleModal} />}
       </Main>
       <Footer toggleModal={toggleModal} setPlayState={setPlayState} />
       <BgVideo />

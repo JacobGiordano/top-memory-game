@@ -3,12 +3,11 @@ import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Modal from "../Modal/Modal";
 import "./Confirm.css";
 
-function Confirm({ toggleModal, setPlayState }) {
+function Confirm({ toggleModal }) {
   const handleCancelClick = () => {
     toggleModal(".confirm-choice", "play");
   };
   const handleConfirmClick = () => {
-    // setPlayState("reset");
     toggleModal(".confirm-choice", "reset");
   };
   return (

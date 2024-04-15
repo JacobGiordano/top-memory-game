@@ -4,9 +4,8 @@ import Button from "../Button/Button";
 import "./WinningScreen.css";
 
 function WinningScreen({ toggleModal, handlePlayAgainClick }) {
-  const handleOnClick = (e) => {
-    toggleModal(e.target.closest("dialog").classList);
-    toggleModal(".title-screen");
+  const handleOnClick = () => {
+    toggleModal(".you-win", "reset");
   };
 
   return (
