@@ -16,11 +16,13 @@ function TitleScreen({ toggleModal, handleDifficultyClick }) {
         <MarvelLogo />
         <div className='marvel-logo-bg'></div>
       </div>
-      <Logo
-        classString={"title-screen-logo"}
-        fileDirectory={"images"}
-        fileNameWithExtension={"Secret-Wars_1984-1985.webp"}
-      />
+      <div className='title-screen-logo-wrapper'>
+        <Logo
+          classString={"title-screen-logo"}
+          fileDirectory={"images"}
+          fileNameWithExtension={"Secret-Wars_1984-1985.webp"}
+        />
+      </div>
       <ButtonGroup>
         <Button
           text='Easy'

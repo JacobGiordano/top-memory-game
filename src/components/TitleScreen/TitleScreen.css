@@ -1,9 +1,11 @@
-dialog.title-screen[open] {
+dialog.title-screen[open],
+dialog.title-screen .modal-content {
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 1rem;
 }
 
 dialog.title-screen .marvel-logo,
@@ -13,11 +15,27 @@ dialog.title-screen .title-screen-logo {
   height: auto;
 }
 
+dialog.title-screen .title-screen-logo-wrapper {
+  display: block;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+dialog.title-screen .title-screen-logo-wrapper::after {
+  content: "Memory Game";
+  display: block;
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  bottom: -0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
 dialog.title-screen .marvel-logo {
   border: none;
   box-shadow: none;
   max-width: 80px;
-  margin: 0 auto 0.5rem;
   fill: #f0141e; /* Marvel red… */
 }
 
@@ -42,5 +60,4 @@ dialog.title-screen .marvel-logo-bg {
 dialog.title-screen .link-wrapper {
   display: block;
   width: 100%;
-  margin-top: 1rem;
 }
