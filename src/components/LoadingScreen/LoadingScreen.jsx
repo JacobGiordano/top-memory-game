@@ -1,13 +1,12 @@
-import Modal from "../Modal/Modal";
 import "./LoadingScreen.css";
 import Logo from "../../assets/svg/marvel.svg?react";
 
-function LoadingScreen({ children, toggleModal }) {
+function LoadingScreen() {
   return (
-    <Modal classString='loading-screen' toggleModal={toggleModal}>
+    <dialog className='loading-screen'>
       <Logo />
       <img src='' alt='' className='logo-bg-img' />
-    </Modal>
+    </dialog>
   );
 }
 export default LoadingScreen;
