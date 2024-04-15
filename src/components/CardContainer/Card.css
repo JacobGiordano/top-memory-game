@@ -35,6 +35,7 @@
   box-shadow: none;
 }
 
+.character-card:hover,
 .character-card:focus-visible {
   outline: auto;
   outline-color: var(--color-light);
