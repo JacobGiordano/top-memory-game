@@ -1,10 +1,28 @@
 .header {
   display: flex;
   position: sticky;
-  top: 0;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  top: 0;
   z-index: 2;
+  flex: 1 1 0;
+}
+
+.header .header-logo {
+  display: none;
+  width: 100%;
+  max-width: 120px;
+}
+
+@media screen and (min-width: 500px) {
+  .header .header-logo {
+    display: block;
+  }
+}
+
+.header button.quit-btn {
+  font-size: 0.75rem;
 }

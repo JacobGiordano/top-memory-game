@@ -1,6 +1,10 @@
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 import "./Modal.css";
 
-function Modal({ children, classString, toggleModal }) {
+function Modal({ children, classString, toggleModal, noToggle }) {
+  const classes = classString ? classString : null;
+
   const closeModal = (e) => {
     const modal = e.target.closest("dialog");
     if (e.target === modal) {
@@ -8,11 +12,27 @@ function Modal({ children, classString, toggleModal }) {
     }
   };
 
-  const classes = classString ? classString : null;
+  useEffect(() => {
+    const classSelectors = classString.split(" ").join(".");
+    const selector = `.${classSelectors}`;
+    document.querySelector(selector).showModal();
+  }, []);
+
   return (
-    <dialog className={classes} onClick={(e) => closeModal(e)}>
+    <motion.dialog
+      className={classes}
+      onClick={!noToggle ? (e) => closeModal(e) : null}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+        type: "spring",
+        velocity: 5,
+      }}
+    >
       <div className='modal-content'>{children}</div>
-    </dialog>
+    </motion.dialog>
   );
 }
 export default Modal;

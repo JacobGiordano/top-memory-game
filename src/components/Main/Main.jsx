@@ -1,6 +1,10 @@
 import "./Main.css";
 
 function Main({ children }) {
-  return <section className='main'>{children}</section>;
+  return (
+    <main className='main expand'>
+      <div className='inner-main-container'>{children}</div>
+    </main>
+  );
 }
 export default Main;

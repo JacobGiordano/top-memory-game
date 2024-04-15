@@ -4,10 +4,11 @@ import Modal from "../Modal/Modal";
 import "./Confirm.css";
 
 function Confirm({ toggleModal }) {
-  const confirmChoice = (e, callback) => {
-    const clicked = e.target.dataset.response;
-    console.log(clicked);
-    callback;
+  const handleCancelClick = () => {
+    toggleModal(".confirm-choice", "play");
+  };
+  const handleConfirmClick = () => {
+    toggleModal(".confirm-choice", "reset");
   };
   return (
     <Modal classString='confirm-choice' toggleModal={toggleModal}>
@@ -16,13 +17,13 @@ function Confirm({ toggleModal }) {
         <Button
           text='Cancel'
           classString={"cancel"}
-          onClick={(e) => confirmChoice(e, toggleModal(".confirm-choice"))}
+          onClick={handleCancelClick}
           dataAttrs={{ "data-response": "cancel" }}
         ></Button>
         <Button
           text='Ok'
           classString={"ok"}
-          onClick={(e) => confirmChoice(e, toggleModal(".title-screen"))}
+          onClick={handleConfirmClick}
           dataAttrs={{ "data-response": "ok" }}
         ></Button>
       </ButtonGroup>

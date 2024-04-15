@@ -12,6 +12,8 @@ import WinningScreen from "./components/WinningScreen/WinningScreen";
 import LosingScreen from "./components/LosingScreen/LosingScreen";
 import Confirm from "./components/Confirm/Confirm";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import Logo from "./components/Logo/Logo";
+import InfoScreen from "./components/InfoScreen/InfoScreen";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -21,6 +23,7 @@ function App() {
   const [clickedCards, setClickedCards] = useState([]);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [playState, setPlayState] = useState("");
 
   // Fetching character data
   useEffect(() => {
@@ -63,16 +66,11 @@ function App() {
 
   // Card creation
   useEffect(() => {
-    const controller = new AbortController();
     const createCards = () => {
       getCharactersForCards();
     };
 
     createCards(characters);
-
-    return () => {
-      controller.abort;
-    };
   }, [difficulty]);
 
   // Get random number within specified range
@@ -134,6 +132,14 @@ function App() {
     return true;
   };
 
+  const isCompletelyDifferent = (array) => {
+    let status = true;
+    for (let i = 0; i < array.length; i++) {
+      array[i] === selectedCharacters[i] ? (status = false) : null;
+    }
+    return status;
+  };
+
   // Shuffle the order of an array's entries
   const shuffleArray = (array) => {
     const shuffledArray = [];
@@ -149,7 +155,10 @@ function App() {
       }
     }
 
-    if (!arrayIsTheSame(array, shuffledArray)) {
+    if (
+      !arrayIsTheSame(array, shuffledArray) &&
+      isCompletelyDifferent(shuffledArray)
+    ) {
       setSelectedCharacters(shuffledArray);
       return;
     }
@@ -187,6 +196,10 @@ function App() {
     if (game && (game.status === "win" || game.status === "lose")) {
       if (game.status === "win") {
         keepScore(characterName);
+        setPlayState("win");
+      }
+      if (game.status === "lose") {
+        setPlayState("lose");
       }
       toggleModal(`.you-${game.status}`);
       return;
@@ -201,12 +214,18 @@ function App() {
     resetGame();
     getCharactersForCards();
     toggleModal(e.target.closest("dialog").classList);
+    if (e.target.dataset["difficulty"] === "hard") {
+      document.querySelector(".main").classList.remove("expand");
+    } else {
+      document.querySelector(".main").classList.add("expand");
+    }
   };
 
   // Reset Game
   const resetGame = () => {
     setScore(0);
     setClickedCards([]);
+    setPlayState("play");
   };
 
   // Handle Play Again Click
@@ -218,11 +237,12 @@ function App() {
 
   // Handle Quit Game Click
   const handleQuitClick = () => {
+    setPlayState("paused");
     toggleModal(".confirm-choice");
   };
 
   // Toggle modal
-  const toggleModal = (modalSelector) => {
+  const toggleModal = (modalSelector, newPlayState) => {
     const modal = document.querySelector(modalSelector);
     [...document.querySelectorAll("dialog")].map((dialog) =>
       dialog !== modal ? dialog.close() : null
@@ -232,7 +252,9 @@ function App() {
         modal.close();
       } else {
         modal.showModal();
-        console.log(`Opened '.${modal.classList}'`);
+      }
+      if (newPlayState) {
+        setPlayState(newPlayState);
       }
     }
   };
@@ -249,16 +271,19 @@ function App() {
         }, i * 150);
       }
     }
-    return () => {
-      //
-    };
   }, [comics]);
 
   useEffect(() => {
     if (characters.length > 0) {
       const delay = setTimeout(() => {
-        document.querySelector(".title-screen").showModal();
-        document.querySelector(".loading-screen").close();
+        document.querySelector(".loading-screen") &&
+          document.querySelector(".loading-screen").classList.add("fade-out");
+        const closeTimer = setTimeout(() => {
+          setPlayState("reset");
+          document.querySelector(".title-screen") &&
+            document.querySelector(".title-screen").showModal();
+          clearTimeout(closeTimer);
+        }, 1000);
         clearTimeout(delay);
       }, 5500);
     } else {
@@ -274,37 +299,52 @@ function App() {
   return (
     <>
       <Header>
-        <Button
-          onClick={() => toggleModal(".title-screen")}
-          text='Title screen'
+        <Logo
+          classString={"header-logo"}
+          fileDirectory={"images"}
+          fileNameWithExtension={"Secret-Wars_1984-1985.webp"}
         />
         <Scoreboard score={score} highScore={highScore} resetGame={resetGame} />
-        <Button text='Quit game' onClick={handleQuitClick}></Button>
+        <Button
+          classString='quit-btn'
+          text='Quit'
+          onClick={handleQuitClick}
+        ></Button>
       </Header>
       <Main>
         <CardContainer
           characterData={selectedCharacters}
           handleCardClick={handleCardClick}
         />
-        <TitleScreen
-          handleDifficultyClick={handleDifficultyClick}
-          toggleModal={toggleModal}
-        />
-        <WinningScreen
-          toggleModal={toggleModal}
-          handlePlayAgainClick={handlePlayAgainClick}
-        />
-        <LosingScreen
-          toggleModal={toggleModal}
-          handlePlayAgainClick={handlePlayAgainClick}
-        />
-        <Confirm
-          toggleModal={toggleModal}
-          handlePlayAgainClick={handlePlayAgainClick}
-        />
-        <LoadingScreen toggleModal={toggleModal} />
+
+        {playState === "reset" && (
+          <TitleScreen
+            toggleModal={toggleModal}
+            handleDifficultyClick={handleDifficultyClick}
+          />
+        )}
+        {playState === "win" && (
+          <WinningScreen
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+        )}
+        {playState === "lose" && (
+          <LosingScreen
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+        )}
+        {playState === "paused" && (
+          <Confirm
+            toggleModal={toggleModal}
+            handlePlayAgainClick={handlePlayAgainClick}
+          />
+        )}
+        {playState === "" && <LoadingScreen toggleModal={toggleModal} />}
+        {playState === "info" && <InfoScreen toggleModal={toggleModal} />}
       </Main>
-      <Footer></Footer>
+      <Footer toggleModal={toggleModal} setPlayState={setPlayState} />
       <BgVideo />
     </>
   );
