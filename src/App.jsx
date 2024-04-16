@@ -295,7 +295,6 @@ function App() {
           setTimeout(function () {
             if (comicUrls[i]) {
               logoBgImg ? (logoBgImg.src = `${comicUrls[i]}`) : null;
-              console.log(`${comicUrls[i]}`);
             }
           }, i * 200);
         }
