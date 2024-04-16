@@ -6,7 +6,7 @@ function Logo({ classString, fileDirectory, fileNameWithExtension }) {
     <img
       className={classes}
       draggable='false'
-      src={`../src/assets/${fileDirectory}/${fileNameWithExtension}`}
+      src={`/${fileDirectory}/${fileNameWithExtension}`}
     ></img>
   );
 }
