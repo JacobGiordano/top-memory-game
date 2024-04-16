@@ -259,17 +259,47 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const comicEntries = [...new Set(comics)].reverse();
-    if (comicEntries.length > 0) {
+  // Pre-cache the iamges
+  const preCacheImgs = async () => {
+    return new Promise((resolve) => {
+      // const comicEntries = [...new Set(comics)].reverse();
+      const comicEntries = Array.from(
+        new Set(comics.map(JSON.stringify)),
+        JSON.parse
+      );
+      let comicUrls = [];
+      const comicCovers = [];
+      // Pre-cache the images & create a simple array of urls
       for (let i = 1; i <= comicEntries.length; i++) {
         const logoBgImg = document.querySelector(".logo-bg-img");
-        setTimeout(function () {
-          if (comicEntries[i] && comicEntries[i].images) {
-            logoBgImg.src = `${comicEntries[i].images[0].path}.${comicEntries[i].images[0].extension}`;
-          }
-        }, i * 150);
+        if (comicEntries[i] && comicEntries[i].images) {
+          const url = `${comicEntries[i].images[0].path.replace(
+            "http",
+            "https"
+          )}.${comicEntries[i].images[0].extension}`;
+          logoBgImg ? (logoBgImg.src = url) : null;
+          !comicCovers.includes(url) ? comicCovers.push(url) : null;
+        }
       }
+      comicUrls = [...new Set(comicCovers)];
+      return resolve(comicUrls);
+    });
+  };
+
+  useEffect(() => {
+    if (comics.length > 0) {
+      preCacheImgs().then((comicUrls) => {
+        // Now do the actual loop for the flipbook effect
+        for (let i = 1; i <= comicUrls.length; i++) {
+          const logoBgImg = document.querySelector(".logo-bg-img");
+          setTimeout(function () {
+            if (comicUrls[i]) {
+              logoBgImg ? (logoBgImg.src = `${comicUrls[i]}`) : null;
+              console.log(`${comicUrls[i]}`);
+            }
+          }, i * 200);
+        }
+      });
     }
   }, [comics]);
 
