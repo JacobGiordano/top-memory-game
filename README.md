@@ -1,8 +1,13 @@
-# React + Vite
+# Marvel Secret Wars Memory Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## A memory game using the Marvel Comics api and Vite + React, deployed to Vercel.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![screenshot](public/images/app-screenshot.png)
+
+Created as part of **The Odin Project** React Course curriculum. View the full course [here](https://www.theodinproject.com/paths/full-stack-javascript/courses/react).
+
+Check out the Marvel Comics api [here](https://developer.marvel.com/docs#!/public/).
+
+Play the live game [here](https://top-memory-game-jacobgiordanos-projects.vercel.app/).
