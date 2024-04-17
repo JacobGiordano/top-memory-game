@@ -1,7 +1,5 @@
 # Marvel Secret Wars Memory Game
 
----
-
 ## A memory game using the Marvel Comics api and Vite + React, deployed to Vercel.
 
 ![screenshot](public/images/app-screenshot.png)
