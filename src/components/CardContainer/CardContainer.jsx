@@ -67,7 +67,11 @@ function CardContainer({ characterData, handleCardClick }) {
     <div className='character-card-container'>
       {characterData[0] &&
         characterData.map((character, i) => {
-          const imageUrl = `${character.thumbnail.path}.${character.thumbnail.extension}`;
+          const imageUrl =
+            `${character.thumbnail.path}.${character.thumbnail.extension}`.replace(
+              "http",
+              "https"
+            );
           const cardDelay = 0.075 * i * Math.random();
           return (
             <AnimatePresence key={i} mode='wait'>

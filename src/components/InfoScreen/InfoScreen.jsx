@@ -12,8 +12,8 @@ function InfoScreen({ toggleModal }) {
       <ul>
         <li>Click each character card without selecting the same one twice.</li>
         <li>
-          You can change start a new game and select a different difficulty by
-          clicking &quot;Quit&quot; in the upper-right
+          Start a new game or change the difficulty by clicking &quot;Quit&quot;
+          in the upper-right.
         </li>
       </ul>
       <ButtonGroup>
