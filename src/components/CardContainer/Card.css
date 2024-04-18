@@ -54,6 +54,7 @@
 
 .character-card-name {
   display: block;
+  color: var(--color-light);
   width: 100%;
   text-align: center;
   padding: 0.25rem;
