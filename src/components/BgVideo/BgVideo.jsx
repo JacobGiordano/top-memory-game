@@ -20,8 +20,8 @@ function BgVideo() {
         disableRemotePlayback={true}
         muted={true}
       >
-        <source src={mediumVideo} media='(max-width: 659px)'></source>
-        <source src={largeVideo} media='(max-width: 979px)'></source>
+        <source src={mediumVideo} media='(max-width: 320px)'></source>
+        <source src={largeVideo} media='(max-width: 680px)'></source>
         <source src={extraLargeVideo}></source>
       </video>
     </div>
