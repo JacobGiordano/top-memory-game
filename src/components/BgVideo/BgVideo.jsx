@@ -1,5 +1,5 @@
 import "./BgVideo.css";
-import video from "/videos/nebula-video.mp4#t=0.1";
+import video from "/videos/nebula-video.mp4";
 
 function BgVideo() {
   return (
