@@ -27,9 +27,15 @@ dialog.title-screen .title-screen-logo-wrapper::after {
   position: absolute;
   margin: 0 auto;
   width: 100%;
-  bottom: -0.5rem;
+  bottom: -1rem;
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+@media screen and (min-width: 530px) {
+  dialog.title-screen .title-screen-logo-wrapper::after {
+    bottom: -0.5rem;
+  }
 }
 
 dialog.title-screen .marvel-logo {
