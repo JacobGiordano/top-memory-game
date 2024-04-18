@@ -8,7 +8,7 @@ function InfoScreen({ toggleModal }) {
   };
   return (
     <Modal classString='info' toggleModal={toggleModal}>
-      <h2>Information</h2>
+      <h2>Game Info</h2>
       <ul>
         <li>Click each character card without selecting the same one twice.</li>
         <li>
