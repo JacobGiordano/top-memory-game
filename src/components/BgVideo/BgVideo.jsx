@@ -12,7 +12,15 @@ function BgVideo() {
   }, []);
   return (
     <div className='bg-video-container'>
-      <video className='bg-video' autoPlay loop muted disableRemotePlayback>
+      <video
+        className='bg-video'
+        autoPlay={true}
+        loop={true}
+        controls={false}
+        playsInline={true}
+        disableRemotePlayback={true}
+        muted={true}
+      >
         <source src={smallVideo} media='(max-width: 639px)'></source>
         <source src={mediumVideo} media='(max-width: 959px)'></source>
         <source src={largeVideo} media='(max-width: 1279px)'></source>
