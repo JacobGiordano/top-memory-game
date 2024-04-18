@@ -15,6 +15,10 @@ function InfoScreen({ toggleModal }) {
           Start a new game or change the difficulty by clicking &quot;Quit&quot;
           in the upper-right.
         </li>
+        <li>
+          Open this screen again by clicking the &quot;?&quot; in the
+          lower-right.
+        </li>
       </ul>
       <ButtonGroup>
         <Button text='Close' onClick={handleCloseClick} />

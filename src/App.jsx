@@ -24,6 +24,15 @@ function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [playState, setPlayState] = useState("");
+  const [showGameInfo, setShowGameInfo] = useState(null);
+
+  // Supress showing info screen on first game if local storage is set to "false"
+  useEffect(() => {
+    const showGameInfoVal = localStorage.getItem("showGameInfo");
+    showGameInfoVal === "false"
+      ? setShowGameInfo(false)
+      : setShowGameInfo(true);
+  }, []);
 
   // Fetching character data
   useEffect(() => {
@@ -218,6 +227,15 @@ function App() {
       document.querySelector(".main").classList.remove("expand");
     } else {
       document.querySelector(".main").classList.add("expand");
+    }
+    // Trigger the info screen the first time the game is played
+    if (showGameInfo) {
+      const delay = setTimeout(() => {
+        setPlayState("info");
+        setShowGameInfo(false);
+        localStorage.setItem("showGameInfo", false);
+        clearTimeout(delay);
+      }, 1500);
     }
   };
 
