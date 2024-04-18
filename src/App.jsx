@@ -24,7 +24,15 @@ function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [playState, setPlayState] = useState("");
-  const [showGameInfo, setShowGameInfo] = useState(true);
+  const [showGameInfo, setShowGameInfo] = useState(null);
+
+  // Supress showing info screen on first game if local storage is set to "false"
+  useEffect(() => {
+    const showGameInfoVal = localStorage.getItem("showGameInfo");
+    showGameInfoVal === "false"
+      ? setShowGameInfo(false)
+      : setShowGameInfo(true);
+  }, []);
 
   // Fetching character data
   useEffect(() => {
@@ -225,6 +233,7 @@ function App() {
       const delay = setTimeout(() => {
         setPlayState("info");
         setShowGameInfo(false);
+        localStorage.setItem("showGameInfo", false);
         clearTimeout(delay);
       }, 1500);
     }
