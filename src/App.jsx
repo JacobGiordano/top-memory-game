@@ -259,46 +259,61 @@ function App() {
     }
   };
 
-  // Pre-cache the iamges
-  const preCacheImgs = async () => {
+  // Generate an array of the img urls
+  const getImgUrls = async () => {
     return new Promise((resolve) => {
-      // const comicEntries = [...new Set(comics)].reverse();
       const comicEntries = Array.from(
         new Set(comics.map(JSON.stringify)),
         JSON.parse
       );
-      let comicUrls = [];
       const comicCovers = [];
-      // Pre-cache the images & create a simple array of urls
+      // Create a simple array of urls
       for (let i = 1; i <= comicEntries.length; i++) {
-        const logoBgImg = document.querySelector(".logo-bg-img");
         if (comicEntries[i] && comicEntries[i].images) {
           const url = `${comicEntries[i].images[0].path.replace(
             "http",
             "https"
           )}.${comicEntries[i].images[0].extension}`;
-          logoBgImg ? (logoBgImg.src = url) : null;
           !comicCovers.includes(url) ? comicCovers.push(url) : null;
         }
       }
-      comicUrls = [...new Set(comicCovers)];
+      const comicUrls = [...new Set(comicCovers)];
       return resolve(comicUrls);
     });
   };
 
+  const addComicImgsToDOM = (comicUrls) => {
+    const loadingScreenEl = document.querySelector(".loading-screen");
+    for (let i = 1; i <= comicUrls.length; i++) {
+      const newImg = document.createElement("img");
+      newImg.classList.add("logo-bg-img", "hidden");
+      newImg.src = `${comicUrls[i]}`;
+      loadingScreenEl.append(newImg);
+    }
+  };
+
   useEffect(() => {
     if (comics.length > 0) {
-      preCacheImgs().then((comicUrls) => {
-        // Now do the actual loop for the flipbook effect
-        for (let i = 1; i <= comicUrls.length; i++) {
-          const logoBgImg = document.querySelector(".logo-bg-img");
-          setTimeout(function () {
-            if (comicUrls[i]) {
-              logoBgImg ? (logoBgImg.src = `${comicUrls[i]}`) : null;
-            }
-          }, i * 200);
-        }
-      });
+      // Get the image urls array
+      getImgUrls()
+        .then((comicUrls) => {
+          return new Promise((resolve) => {
+            // Add all of the images to the DOM
+            addComicImgsToDOM(comicUrls);
+            return resolve();
+          });
+        })
+        .then(() => {
+          // Now reveal each image for the flipbook effect
+          const comicImgs = document.querySelectorAll(".logo-bg-img");
+          for (let i = 1; i <= comicImgs.length; i++) {
+            setTimeout(function () {
+              if (comicImgs[i]) {
+                comicImgs[i].classList.remove("hidden");
+              }
+            }, i * 150);
+          }
+        });
     }
   }, [comics]);
 

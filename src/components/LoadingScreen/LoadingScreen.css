@@ -82,6 +82,11 @@ dialog.loading-screen .logo-bg-img {
   z-index: -2;
 }
 
+dialog.loading-screen .logo-bg-img.hidden {
+  display: none;
+  visibility: hidden;
+}
+
 dialog.loading-screen svg {
   display: block;
   fill: white;
