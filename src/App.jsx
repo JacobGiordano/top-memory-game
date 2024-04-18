@@ -24,6 +24,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [playState, setPlayState] = useState("");
+  const [showGameInfo, setShowGameInfo] = useState(true);
 
   // Fetching character data
   useEffect(() => {
@@ -218,6 +219,14 @@ function App() {
       document.querySelector(".main").classList.remove("expand");
     } else {
       document.querySelector(".main").classList.add("expand");
+    }
+    // Trigger the info screen the first time the game is played
+    if (showGameInfo) {
+      const delay = setTimeout(() => {
+        setPlayState("info");
+        setShowGameInfo(false);
+        clearTimeout(delay);
+      }, 1500);
     }
   };
 
