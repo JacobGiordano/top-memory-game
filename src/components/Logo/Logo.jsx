@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import "./Logo.css";
 
 function Logo({ classString, fileDirectory, fileNameWithExtension }) {
@@ -10,4 +11,11 @@ function Logo({ classString, fileDirectory, fileNameWithExtension }) {
     ></img>
   );
 }
+
+Logo.propTypes = {
+  classString: PropTypes.string,
+  fileDirectory: PropTypes.string,
+  fileNameWithExtension: PropTypes.string,
+};
+
 export default Logo;

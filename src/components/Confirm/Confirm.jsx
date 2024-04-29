@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import Button from "../Button/Button";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Modal from "../Modal/Modal";
@@ -30,4 +31,9 @@ function Confirm({ toggleModal }) {
     </Modal>
   );
 }
+
+Confirm.propTypes = {
+  toggleModal: PropTypes.func,
+};
+
 export default Confirm;

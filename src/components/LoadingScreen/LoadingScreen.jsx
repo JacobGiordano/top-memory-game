@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import "./LoadingScreen.css";
 import Logo from "../../assets/svg/marvel.svg?react";
 

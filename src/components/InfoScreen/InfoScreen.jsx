@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import Modal from "../Modal/Modal";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Button from "../Button/Button";
@@ -26,4 +27,9 @@ function InfoScreen({ toggleModal }) {
     </Modal>
   );
 }
+
+InfoScreen.propTypes = {
+  toggleModal: PropTypes.func,
+};
+
 export default InfoScreen;

@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import "./Modal.css";
@@ -35,4 +36,12 @@ function Modal({ children, classString, toggleModal, noToggle }) {
     </motion.dialog>
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.any,
+  classString: PropTypes.string,
+  toggleModal: PropTypes.func,
+  noToggle: PropTypes.bool,
+};
+
 export default Modal;

@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import "./BgVideo.css";
 import mediumVideo from "/videos/nebula_25047_960×540.mp4";
 import largeVideo from "/videos/nebula_25047_1280×720.mp4";

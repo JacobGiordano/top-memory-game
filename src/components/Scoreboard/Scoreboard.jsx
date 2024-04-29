@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import "./Scoreboard.css";
 
 function Scoreboard({ score, highScore }) {
@@ -13,4 +14,10 @@ function Scoreboard({ score, highScore }) {
     </div>
   );
 }
+
+Scoreboard.propTypes = {
+  score: PropTypes.string,
+  highScore: PropTypes.string,
+};
+
 export default Scoreboard;
