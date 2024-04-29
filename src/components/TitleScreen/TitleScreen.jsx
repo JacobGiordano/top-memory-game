@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import Modal from "../Modal/Modal";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Button from "../Button/Button";
@@ -45,10 +46,16 @@ function TitleScreen({ toggleModal, handleDifficultyClick }) {
           href='https://www.marvel.com/comics/series/2063/secret_wars_1984_-_1985?byZone=marvel_site_zone&offset=0&byType=comic_series&dateStart=&dateEnd=&orderBy=release_date+desc&byId=2063&limit=20&count=14&originalReleaseStart=1984-5-01&originalReleaseEnd=2007-3-01'
           target='_blank'
         >
-          What is "Secret Wars"?
+          What is &quot;Secret Wars&quot;?
         </a>
       </div>
     </Modal>
   );
 }
+
+TitleScreen.propTypes = {
+  toggleModal: PropTypes.func,
+  handleDifficultyClick: PropTypes.func,
+};
+
 export default TitleScreen;

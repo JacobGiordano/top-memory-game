@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import "./Button.css";
 
 function Button({ children, classString, dataAttrs, onClick, text, value }) {
@@ -14,4 +15,14 @@ function Button({ children, classString, dataAttrs, onClick, text, value }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  children: PropTypes.any,
+  classString: PropTypes.string,
+  dataAttrs: PropTypes.object,
+  onClick: PropTypes.func,
+  text: PropTypes.string,
+  value: PropTypes.string,
+};
+
 export default Button;

@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import Modal from "../Modal/Modal";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Button from "../Button/Button";
@@ -25,4 +26,10 @@ function WinningScreen({ toggleModal, handlePlayAgainClick }) {
     </Modal>
   );
 }
+
+WinningScreen.propTypes = {
+  toggleModal: PropTypes.func,
+  handlePlayAgainClick: PropTypes.func,
+};
+
 export default WinningScreen;

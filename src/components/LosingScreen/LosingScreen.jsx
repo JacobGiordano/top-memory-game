@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import Modal from "../Modal/Modal";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import Button from "../Button/Button";
@@ -28,4 +29,10 @@ function LosingScreen({ toggleModal, handlePlayAgainClick }) {
     </Modal>
   );
 }
+
+LosingScreen.propTypes = {
+  toggleModal: PropTypes.func,
+  handlePlayAgainClick: PropTypes.func,
+};
+
 export default LosingScreen;

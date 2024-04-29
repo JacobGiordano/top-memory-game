@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import Button from "../Button/Button";
 import "./Footer.css";
 import GitHubLogo from "../../assets/svg/github-mark-white.svg?react";
@@ -60,4 +61,11 @@ function Footer({ children, toggleModal, setPlayState }) {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  children: PropTypes.any,
+  toggleModal: PropTypes.func,
+  setPlayState: PropTypes.func,
+};
+
 export default Footer;

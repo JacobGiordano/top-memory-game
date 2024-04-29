@@ -1,3 +1,4 @@
+import { PropTypes } from "prop-types";
 import "./CardContainer.css";
 import "./Card.css";
 import { motion, AnimatePresence } from "framer-motion";
@@ -113,4 +114,10 @@ function CardContainer({ characterData, handleCardClick }) {
     </div>
   );
 }
+
+CardContainer.propTypes = {
+  characterData: PropTypes.object,
+  handleCardClick: PropTypes.func,
+};
+
 export default CardContainer;
