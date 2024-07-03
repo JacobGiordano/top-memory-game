@@ -6,6 +6,6 @@
 
 Created as part of **The Odin Project** React Course curriculum. View the full course [here](https://www.theodinproject.com/paths/full-stack-javascript/courses/react).
 
-Check out the Marvel Comics api [here](https://developer.marvel.com/docs#!/public/).
+Check out the **Marvel Comics** api [here](https://developer.marvel.com/docs#!/public/).
 
 Play the live game [here](https://top-memory-game-jacobgiordanos-projects.vercel.app/).
